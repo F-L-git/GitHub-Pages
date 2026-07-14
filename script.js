@@ -105,4 +105,45 @@ if ('IntersectionObserver' in window) {
         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(section);
     });
+
+    // ========================
+// 6. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
+// ========================
+function startCountdown(targetDate) {
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    function update() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            // Время истекло
+            document.getElementById('countdown').innerHTML = '🎉 Обновление уже вышло!';
+            // Опционально: перезагрузить страницу, чтобы показать новую версию
+            // setTimeout(() => location.reload(), 3000);
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        daysEl.textContent = String(days).padStart(2, '0');
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+
+    update();
+    setInterval(update, 1000);
+}
+
+// Укажите ДАТУ и ВРЕМЯ следующего обновления (в UTC, если не хотите проблем с часовыми поясами)
+// Формат: год, месяц (0-11), день, часы, минуты, секунды
+const nextUpdate = new Date(2026, 6, 20, 18, 0, 0); // 20 июля 2026 18:00 (по вашему времени)
+startCountdown(nextUpdate.getTime());
 }
