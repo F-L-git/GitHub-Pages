@@ -49,3 +49,20 @@ footer {
   border-top: 1px solid #e2e8f0;
   padding-top: 1rem;
 }
+
+/* Тёмная тема */
+body.dark-theme {
+    background-color: #1e1e2f;
+    color: #e0e0e0;
+}
+body.dark-theme .container {
+    background: #2d2d44;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+body.dark-theme .btn {
+    background: #4a4a6a;
+    color: white;
+}
+body.dark-theme a {
+    color: #89b4fa;
+}
