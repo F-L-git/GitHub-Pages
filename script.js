@@ -115,6 +115,14 @@ const translations = {
     }
 };
 
+const langToggle = document.getElementById('lang-toggle');
+if (langToggle) {
+    langToggle.addEventListener('click', () => {
+        const newLang = currentLang === 'ru' ? 'en' : 'ru';
+        setLanguage(newLang);
+    });
+}
+
 let currentLang = localStorage.getItem('lang') || 'ru';
 
 function setLanguage(lang) {
