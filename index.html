@@ -6,18 +6,26 @@
     <title>Мой сайт на GitHub Pages</title>
     <link rel="stylesheet" href="style.css?v=3">
     <link rel="manifest" href="manifest.json">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="android-chrome-192x192" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
 </head>
 <body>
+    
     <!-- Кастомный курсор -->
     <div id="cursor-dot"></div>
     <div id="cursor-trail"></div>
+
+    <!-- Фоновые холсты (город, снег, частицы) -->
     <!-- Холст для снега (поверх фона, под частицами) -->
     <canvas id="snow-canvas"></canvas>
     <!-- Холст для частиц (собственная реализация) -->
-    <canvas id="particles-canvas"></canvas>
+    <!-- <canvas id="particles-canvas"></canvas> -->
 
+    <!-- Основной контент -->
     <div class="container">
         <header>
             <div class="header-top">

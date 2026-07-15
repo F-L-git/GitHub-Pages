@@ -538,23 +538,28 @@ document.querySelectorAll('.section h2').forEach((header) => {
 });
 
 // ========================
-// 5. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ (Intersection Observer)
+// АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ (Intersection Observer) с задержкой
 // ========================
 if ('IntersectionObserver' in window) {
     const sections = document.querySelectorAll('.section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                const index = Array.from(sections).indexOf(entry.target);
+                // Добавляем задержку: 0.1с * индекс
+                entry.target.style.transitionDelay = (index * 0.1) + 's';
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
             }
         });
     }, { threshold: 0.1 });
 
-    sections.forEach(section => {
+    sections.forEach((section, index) => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        // Убираем transitionDelay по умолчанию, чтобы не конфликтовать
+        section.style.transitionDelay = '0s';
         observer.observe(section);
     });
 }
@@ -1011,3 +1016,81 @@ function showLocationOnMap(lat, lon, popupText) {
     // (Опционально) скрыть стандартный курсор:
     document.body.style.cursor = 'none';
 })();
+
+// В script.js
+function typeWriter(element, text, speed = 100) {
+    let i = 0;
+    element.textContent = '';
+    function type() {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+// Использование после загрузки DOM
+document.addEventListener('DOMContentLoaded', () => {
+    const h1 = document.getElementById('greeting');
+    const originalText = h1.textContent;
+    typeWriter(h1, originalText, 80);
+});
+
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const city = document.getElementById('city-canvas');
+    if (city) {
+        city.style.transform = `translateY(${scrollY * 0.1}px)`;
+    }
+});
+
+document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = e.clientX - rect.left - size/2 + 'px';
+        ripple.style.top = e.clientY - rect.top - size/2 + 'px';
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 800);
+    });
+});
+
+// ========================
+// ИНТЕРАКТИВНЫЙ ГРАДИЕНТ (реакция на мышь)
+// ========================
+(function initInteractiveGradient() {
+    let targetX = 50, targetY = 50; // целевые значения
+    let currentX = 50, currentY = 50; // текущие значения (для сглаживания)
+
+    // Обновляем целевые координаты при движении мыши
+    document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth) * 100;
+        const y = (e.clientY / window.innerHeight) * 100;
+        // Ограничиваем диапазон, чтобы градиент не уходил слишком далеко
+        targetX = Math.min(90, Math.max(10, x));
+        targetY = Math.min(90, Math.max(10, y));
+    });
+
+    // Плавное приближение текущих значений к целевым
+    function smoothGradient() {
+        currentX += (targetX - currentX) * 0.05; // скорость сглаживания
+        currentY += (targetY - currentY) * 0.05;
+
+        document.body.style.setProperty('--gradient-x', currentX + '%');
+        document.body.style.setProperty('--gradient-y', currentY + '%');
+
+        requestAnimationFrame(smoothGradient);
+    }
+    smoothGradient();
+})();
+
+let autoX = 0, autoY = 0;
+setInterval(() => {
+    autoX = Math.sin(Date.now() / 10000) * 5; // колебания ±5%
+    autoY = Math.cos(Date.now() / 15000) * 5;
+}, 100);
+// В smoothGradient добавьте к targetX/Y autoX/autoY

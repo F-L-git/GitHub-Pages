@@ -517,3 +517,257 @@ body.dark-theme .toast {
 * {
     cursor: none !important;
 }
+
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-theme .section:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Матовый контейнер */
+.container {
+    background: #f0f2f5;
+    /* светлый матовый серый */
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    /* мягкая тень, без блеска */
+    padding: 2rem 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    /* лёгкая светлая кайма */
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+body.dark-theme .container {
+    background: #2a2a3a;
+    /* тёмный матовый */
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.section {
+    background: #ffffff;
+    /* светлая матовая белизна */
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    /* едва заметная тень */
+    border-left: 4px solid #667eea;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+body.dark-theme .section {
+    background: #32324a;
+    /* тёмный матовый */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-left-color: #667eea;
+}
+
+/* При наведении – лёгкое приподнятие без блеска */
+.section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+body.dark-theme .section:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+i {
+    margin-right: 0.3rem;
+    color: inherit;
+    /* сохраняет цвет текста */
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    /* нормальная насыщенность */
+    letter-spacing: 0.02em;
+    /* небольшое межбуквенное расстояние */
+    line-height: 1.7;
+    /* межстрочный интервал для комфортного чтения */
+    color: #2d3748;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    /* чуть плотнее для заголовков */
+    line-height: 1.3;
+}
+
+p {
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.8;
+}
+
+/* Для тёмной темы */
+body.dark-theme {
+    color: #e0e0e8;
+}
+
+:root {
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --radius: 16px;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: rippleAnim 0.8s ease-out;
+    pointer-events: none;
+}
+
+@keyframes rippleAnim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+body {
+    --gradient-x: 50%;
+    --gradient-y: 50%;
+    background: linear-gradient(-45deg,
+            #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    background-position: var(--gradient-x) var(--gradient-y);
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    transition: background-position 0.1s ease-out;
+    /* плавное обновление */
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: var(--gradient-x) var(--gradient-y);
+    }
+
+    50% {
+        background-position: calc(var(--gradient-x) + 10%) calc(var(--gradient-y) + 10%);
+    }
+
+    100% {
+        background-position: var(--gradient-x) var(--gradient-y);
+    }
+}
+
+body.dark-theme {
+    --gradient-x: 50%;
+    --gradient-y: 50%;
+    background: linear-gradient(-45deg,
+            #1a1a2e, #16213e, #0f3460, #1a1a2e);
+    background-size: 400% 400%;
+    background-position: var(--gradient-x) var(--gradient-y);
+    animation: gradientBG 15s ease infinite;
+}
+
+:root {
+    /* Цветовая палитра (брендовые цвета) */
+    --color-primary: #667eea;
+    /* основной синий */
+    --color-primary-dark: #5a67d8;
+    --color-secondary: #764ba2;
+    /* фиолетовый акцент */
+    --color-accent: #f093fb;
+    /* розовый для кнопок (можно заменить) */
+    --color-bg-light: #f8fafc;
+    --color-bg-dark: #12121a;
+    --color-text-light: #1a202c;
+    --color-text-dark: #e2e8f0;
+
+    /* Отступы (spacing scale) */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+
+    /* Радиусы скруглений */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+
+    /* Тени */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+    /* Шрифты */
+    --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+    /* Анимации */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+body { font-family: var(--font-primary); }
+.container { padding: var(--space-lg); border-radius: var(--radius-lg); }
+.section { margin-bottom: var(--space-lg); padding: var(--space-md) var(--space-lg); }
+.btn { padding: var(--space-sm) var(--space-md); border-radius: var(--radius-full); }
+
+/* Плавное появление */
+.section {
+    transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+
+/* При наведении – пружинка */
+.btn {
+    transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-out-expo);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Анимация появления шапки */
+header {
+    animation: fadeInDown 0.8s var(--ease-out-expo) forwards;
+}
+
+.holographic {
+    background: linear-gradient(135deg,
+            #667eea, #764ba2, #f093fb, #f5576c,
+            #667eea, #764ba2);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: holographicShine 6s var(--ease-in-out-quint) infinite;
+    filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.2));
+}
+
+@keyframes holographicShine {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
