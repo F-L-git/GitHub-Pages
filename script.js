@@ -212,7 +212,32 @@ const nextUpdate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 startCountdown(nextUpdate.getTime());
 
 // ========================
-// 10. КНОПКА "НАЖМИ МЕНЯ!" (добавляется динамически)
+// 10. ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ (TOAST)
+// ========================
+function showToast(message) {
+    const container = document.getElementById('toast-container') || (() => {
+        const div = document.createElement('div');
+        div.id = 'toast-container';
+        div.className = 'toast-container';
+        document.body.appendChild(div);
+        return div;
+    })();
+
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    container.appendChild(toast);
+
+    // Удаляем toast после анимации (через 3.5 секунды)
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.remove();
+        }
+    }, 3500);
+}
+
+// ========================
+// 11. КНОПКА "НАЖМИ МЕНЯ!" (добавляется динамически)
 // ========================
 document.addEventListener('DOMContentLoaded', function() {
     const heading = document.querySelector('h1');
@@ -230,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 '💡 Попробуйте обновить страницу!'
             ];
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            alert(randomMessage);
+            showToast(randomMessage);   // вместо alert
         });
         
         heading.parentNode.insertBefore(button, heading.nextSibling);
