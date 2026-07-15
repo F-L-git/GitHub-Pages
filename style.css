@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1000px; /* чуть шире для читаемости */
     width: 100%;
     background: #ffffff;
     border-radius: 20px;
@@ -36,45 +36,59 @@ header {
 }
 
 header h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #2d3748;
     transition: color 0.3s ease;
 }
 
 #time-display {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 500;
     color: #4a5568;
 }
 
-/* Кнопки */
+/* Кнопки – база */
 .btn {
-    display: inline-block;
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 0.8rem;
+    font-size: 1.6rem; /* увеличен для иконки */
+    font-weight: 400;
     border: none;
-    border-radius: 50px;
+    border-radius: 50%; /* круглая кнопка-иконка */
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    text-align: center;
-    text-decoration: none;
-}
-
-#theme-toggle {
+    width: 3.2rem;
+    height: 3.2rem;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    line-height: 1;
 }
-#theme-toggle:hover {
-    transform: scale(1.05);
+.btn:hover {
+    transform: scale(1.1);
     box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
 }
 
+/* Специфика для кнопки переключения темы (иконка) */
+#theme-toggle {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+#theme-toggle:hover {
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* Кнопка "Нажми меня!" – остаётся текстовой, но стилизована */
 .btn-magic {
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     color: #fff;
     box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+    border-radius: 50px; /* овальная */
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    width: auto;
+    height: auto;
     margin: 1rem 0 1.5rem 0;
 }
 .btn-magic:hover {
@@ -82,7 +96,7 @@ header h1 {
     box-shadow: 0 6px 25px rgba(245, 87, 108, 0.6);
 }
 
-/* Таймер обратного отсчёта */
+/* Таймер */
 .countdown-container {
     background: #f0f4ff;
     border-radius: 12px;
@@ -101,7 +115,7 @@ header h1 {
     transition: color 0.3s ease;
 }
 
-/* Секции контента */
+/* ===== КРАСИВОЕ ОФОРМЛЕНИЕ ВСЕХ АБЗАЦЕВ ===== */
 .content {
     margin: 2rem 0;
 }
@@ -109,7 +123,7 @@ header h1 {
 .section {
     background: #f7fafc;
     border-left: 4px solid #667eea;
-    padding: 1.2rem 1.5rem;
+    padding: 1.5rem 2rem;
     border-radius: 8px;
     margin-bottom: 1.5rem;
     transition: background 0.3s ease, border-color 0.3s ease;
@@ -117,18 +131,31 @@ header h1 {
 
 .section h2 {
     color: #2d3748;
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
     transition: color 0.3s ease;
 }
 
-.section p, .section ul, .section ol {
-    margin: 0.5rem 0;
-    line-height: 1.6;
+/* ===== АБЗАЦЫ – ШИРОКИЕ, КРУПНЫЕ, ЧИТАЕМЫЕ ===== */
+.section p {
+    font-size: 1.2rem;        /* крупный */
+    line-height: 1.8;         /* межстрочный интервал */
+    max-width: 90%;           /* не вплотную к краям */
+    margin: 0.8rem auto;      /* центрируем и добавляем отступы */
+    color: #2d3748;
+    transition: color 0.3s ease;
 }
 
+/* Также для списков – сделаем удобочитаемыми */
 .section ul, .section ol {
-    padding-left: 1.5rem;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    padding-left: 2rem;
+    color: #2d3748;
+    transition: color 0.3s ease;
+}
+.section li {
+    margin-bottom: 0.4rem;
 }
 
 .section a {
@@ -149,6 +176,7 @@ footer {
     flex-wrap: wrap;
     color: #4a5568;
     transition: border-color 0.3s ease, color 0.3s ease;
+    font-size: 1.1rem;
 }
 
 /* ===== ТЁМНАЯ ТЕМА (полная) ===== */
@@ -172,8 +200,8 @@ body.dark-theme #time-display {
 
 body.dark-theme #theme-toggle {
     background: linear-gradient(135deg, #4a4a6a 0%, #2d2d44 100%);
-    color: #e0e0e0;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    color: #e0e0e0;
 }
 
 body.dark-theme .btn-magic {
@@ -202,7 +230,7 @@ body.dark-theme .section h2 {
 body.dark-theme .section p,
 body.dark-theme .section ul,
 body.dark-theme .section ol {
-    color: #c8c8e0;
+    color: #d0d0e8;
 }
 
 body.dark-theme .section a {
@@ -214,7 +242,7 @@ body.dark-theme footer {
     color: #a0a0b8;
 }
 
-/* Адаптивность */
+/* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 640px) {
     .container {
         padding: 1.5rem;
@@ -228,7 +256,21 @@ body.dark-theme footer {
         font-size: 1.6rem;
     }
     .btn {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.4rem;
+        align-self: flex-end;
+    }
+    .btn-magic {
         width: 100%;
         text-align: center;
+        border-radius: 50px;
+    }
+    .section p {
+        font-size: 1.1rem;
+        max-width: 100%;
+    }
+    .section ul, .section ol {
+        font-size: 1rem;
     }
 }
