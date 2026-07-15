@@ -444,3 +444,15 @@ window.addEventListener('scroll', () => {
 scrollBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// Динамический заголовок
+let originalTitle = document.title;
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        document.title = '👀 Вернись!';
+    } else {
+        document.title = originalTitle;
+    }
+});
+// Обновляем оригинальный заголовок при изменении (если нужно)
+// Можно также обновлять приветствие, но это опционально.
