@@ -74,8 +74,25 @@ if (themeToggle) {
 }
 
 // ========================
-// 6. СЧЁТЧИК ПОСЕЩЕНИЙ (localStorage)
+// 6. АНИМИРОВАННЫЙ СЧЁТЧИК ПОСЕЩЕНИЙ
 // ========================
+function animateCounter(element, target, duration = 1500) {
+    const start = 0;
+    const startTime = performance.now();
+    const step = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(progress * target);
+        element.textContent = current;
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        } else {
+            element.textContent = target;
+        }
+    };
+    requestAnimationFrame(step);
+}
+
 function updateVisitCounter() {
     let count = localStorage.getItem('pageVisits');
     if (count === null) {
@@ -86,7 +103,10 @@ function updateVisitCounter() {
     localStorage.setItem('pageVisits', count);
     const counterEl = document.getElementById('count');
     if (counterEl) {
-        counterEl.textContent = count;
+        // Сохраняем финальное значение, а затем анимируем от 0
+        const finalCount = count;
+        counterEl.textContent = '0'; // начальное значение
+        animateCounter(counterEl, finalCount, 2000); // 2 секунды
     }
 }
 updateVisitCounter();
