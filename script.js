@@ -261,3 +261,33 @@ document.addEventListener('DOMContentLoaded', function() {
         heading.parentNode.insertBefore(button, heading.nextSibling);
     }
 });
+
+// ========================
+// 12. ВИДЖЕТ ПОГОДЫ (OpenWeatherMap)
+// ========================
+async function fetchWeather() {
+    const apiKey = 'ВАШ_API_КЛЮЧ'; // Замените на свой ключ
+    const city = 'Moscow'; // Название города (можно изменить)
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=ru`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Ошибка загрузки погоды');
+        const data = await response.json();
+
+        const temp = Math.round(data.main.temp);
+        const description = data.weather[0].description;
+        const iconCode = data.weather[0].icon;
+        const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+        document.getElementById('weather-temp').textContent = temp;
+        document.getElementById('weather-desc').textContent = description;
+        document.getElementById('weather-icon').innerHTML = `<img src="${iconUrl}" alt="иконка погоды" style="width: 40px; height: 40px; vertical-align: middle;">`;
+    } catch (error) {
+        console.error('Ошибка получения погоды:', error);
+        document.getElementById('weather-desc').textContent = 'недоступно';
+    }
+}
+
+// Вызовите функцию при загрузке
+document.addEventListener('DOMContentLoaded', fetchWeather);
