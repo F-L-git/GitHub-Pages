@@ -328,3 +328,27 @@ body.dark-theme {
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
 }
+
+/* ===== ПРОГРЕСС-БАР ===== */
+.progress-container {
+    width: 100%;
+    background: #e2e8f0;
+    border-radius: 10px;
+    height: 8px;
+    margin-top: 0.8rem;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 10px;
+    width: 100%;
+    transition: width 0.5s ease;
+}
+body.dark-theme .progress-container {
+    background: #3a3a52;
+}
+body.dark-theme .progress-bar {
+    background: linear-gradient(90deg, #89b4fa, #667eea);
+}
