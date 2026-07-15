@@ -1,99 +1,202 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой сайт на GitHub Pages</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Шапка с приветствием и временем -->
-        <header>
-            <h1 id="greeting">Доброй ночи! 👋</h1>
-            <p id="time-display">🕐 00:00:00</p>
-            <!-- Кнопка теперь без текста, только иконка -->
-            <button id="theme-toggle" class="btn" title="Переключить тему"></button>
-        </header>
+// ========================
+// 1. ПРИВЕТСТВИЕ ПО ВРЕМЕНИ
+// ========================
+function updateGreeting() {
+    const now = new Date();
+    const hour = now.getHours();
+    let greetingText = '';
+    if (hour >= 0 && hour < 6) {
+        greetingText = 'Доброй ночи!';
+    } else if (hour >= 6 && hour < 12) {
+        greetingText = 'Доброе утро!';
+    } else if (hour >= 12 && hour < 18) {
+        greetingText = 'Добрый день!';
+    } else {
+        greetingText = 'Добрый вечер!';
+    }
+    
+    const greetingEl = document.getElementById('greeting');
+    if (greetingEl) {
+        greetingEl.textContent = greetingText + ' 👋';
+    }
 
-        <!-- Таймер обратного отсчёта -->
-        <div class="countdown-container">
-            <p style="font-weight: bold; margin: 0;">⏳ До следующего обновления сайта осталось:</p>
-            <div id="countdown">
-                <span id="days">00</span>д <span id="hours">00</span>ч <span id="minutes">00</span>м <span id="seconds">00</span>с
-            </div>
-        </div>
+    const timeEl = document.getElementById('time-display');
+    if (timeEl) {
+        const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        timeEl.textContent = '🕐 ' + now.toLocaleTimeString('ru-RU', options);
+    }
+}
+updateGreeting();
+setInterval(updateGreeting, 1000);
 
-        <!-- Основной контент -->
-        <section class="content">
-            <div class="section" id="about">
-                <h2>📖 О проекте</h2>
-                <p>Этот сайт создан для изучения возможностей бесплатного хостинга от GitHub. Здесь я буду публиковать свои эксперименты и учебные проекты.</p>
-            </div>
+// ========================
+// 2. ПОЛУЧАЕМ КНОПКУ СРАЗУ (ПЕРЕД ИСПОЛЬЗОВАНИЕМ)
+// ========================
+const themeToggle = document.getElementById('theme-toggle');
 
-            <div class="section" id="tech">
-                <h2>🛠️ Технологии</h2>
-                <ul>
-                    <li>HTML5</li>
-                    <li>CSS3</li>
-                    <li>GitHub Pages</li>
-                </ul>
-            </div>
+// ========================
+// 3. ФУНКЦИЯ ОБНОВЛЕНИЯ ИКОНКИ КНОПКИ
+// ========================
+function updateThemeButton() {
+    if (!themeToggle) return; // если кнопка не найдена, выходим
+    const isDark = document.body.classList.contains('dark-theme');
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    themeToggle.title = isDark ? 'Включить светлую тему' : 'Включить тёмную тему';
+}
 
-            <div class="section" id="setup">
-                <h2>⚙️ Настройка GitHub Pages</h2>
-                <ol>
-                    <li>Перейдите в свой репозиторий на GitHub.</li>
-                    <li>Нажмите <strong>Settings</strong> (вкладка в верхнем меню).</li>
-                    <li>В левом меню выберите <strong>Pages</strong>.</li>
-                    <li>В разделе <strong>Branch</strong> выберите ветку (обычно <code>main</code> или <code>master</code>). Оставьте папку <code>/(root)</code>.</li>
-                    <li>Нажмите <strong>Save</strong>.</li>
-                    <li>Через пару минут сайт станет доступен по ссылке, которая появится в этом же разделе.</li>
-                </ol>
-                <p><strong>Важно:</strong> Если репозиторий не <code>username.github.io</code>, сайт будет по адресу <code>username.github.io/имя-репозитория</code>.</p>
-            </div>
+// ========================
+// 4. АВТОМАТИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ПО ВРЕМЕНИ СУТОК
+// ========================
+function setAutoTheme() {
+    const hour = new Date().getHours();
+    const isDay = hour >= 6 && hour < 18;
+    if (isDay) {
+        document.body.classList.remove('dark-theme');
+    } else {
+        document.body.classList.add('dark-theme');
+    }
+    updateThemeButton(); // теперь themeToggle уже существует
+}
+setAutoTheme();
 
-            <div class="section" id="check">
-                <h2>✅ Проверка и публикация</h2>
-                <ul>
-                    <li>После сохранения настроек подождите 1–2 минуты.</li>
-                    <li>Откройте браузер и перейдите по вашему адресу.</li>
-                    <li>Если видите свою страницу — всё работает!</li>
-                </ul>
-            </div>
+// ========================
+// 5. РУЧНОЕ ПЕРЕКЛЮЧЕНИЕ ПО КЛИКУ
+// ========================
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        updateThemeButton();
+    });
+}
 
-            <div class="section" id="tips">
-                <h2>💡 Дополнительные советы по красивому оформлению</h2>
-                <ul>
-                    <li>Используйте готовые CSS-фреймворки (<a href="https://getbootstrap.com" target="_blank">Bootstrap</a> или <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a>).</li>
-                    <li>Добавьте иконки с помощью <a href="https://fontawesome.com" target="_blank">Font Awesome</a>.</li>
-                    <li>Сделайте адаптивный дизайн.</li>
-                    <li>В README используйте эмодзи, таблицы, списки и выделение кода.</li>
-                </ul>
-            </div>
+// ========================
+// 6. СЧЁТЧИК ПОСЕЩЕНИЙ
+// ========================
+function updateVisitCounter() {
+    let count = localStorage.getItem('pageVisits');
+    if (count === null) {
+        count = 1;
+    } else {
+        count = parseInt(count) + 1;
+    }
+    localStorage.setItem('pageVisits', count);
+    document.getElementById('count').textContent = count;
+}
+updateVisitCounter();
 
-            <div class="section" id="trouble">
-                <h2>❓ Что делать, если сайт не открывается?</h2>
-                <ul>
-                    <li>Убедитесь, что репозиторий публичный.</li>
-                    <li>Проверьте ветку в настройках Pages.</li>
-                    <li>Посмотрите вкладку <strong>Actions</strong> — там могут быть ошибки сборки (для простого HTML сборка не требуется).</li>
-                </ul>
-            </div>
+// ========================
+// 7. АККОРДЕОН
+// ========================
+document.querySelectorAll('.section h2').forEach((header) => {
+    header.style.cursor = 'pointer';
+    header.style.userSelect = 'none';
+    header.style.display = 'flex';
+    header.style.alignItems = 'center';
+    header.style.justifyContent = 'space-between';
+    const icon = document.createElement('span');
+    icon.textContent = ' ▾';
+    icon.style.fontSize = '1.2rem';
+    header.appendChild(icon);
 
-            <div class="section" id="jekyll">
-                <h2>🎨 Альтернативный путь: использование темы Jekyll</h2>
-                <p>Если вы хотите ещё более стильный сайт без написания CSS, в настройках Pages выберите тему из галереи (кнопка <strong>Choose a theme</strong>). GitHub автоматически сгенерирует сайт на основе вашего README.md и добавит стили.</p>
-            </div>
-        </section>
+    const section = header.parentElement;
+    const content = section.querySelector('p, ul, ol');
+    if (!content) return;
 
-        <!-- Футер -->
-        <footer>
-            <p>© 2026, fl-git</p>
-            <p id="visit-counter">👀 Просмотров: <span id="count">0</span></p>
-        </footer>
-    </div>
+    if (section.id !== 'about') {
+        content.style.display = 'none';
+        icon.textContent = ' ▸';
+    }
 
-    <script src="script.js"></script>
-</body>
-</html>
+    header.addEventListener('click', () => {
+        const isOpen = content.style.display !== 'none';
+        content.style.display = isOpen ? 'none' : 'block';
+        icon.textContent = isOpen ? ' ▸' : ' ▾';
+    });
+});
+
+// ========================
+// 8. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ
+// ========================
+if ('IntersectionObserver' in window) {
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(section);
+    });
+}
+
+// ========================
+// 9. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
+// ========================
+function startCountdown(targetDate) {
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    const countdownDiv = document.getElementById('countdown');
+
+    function update() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            countdownDiv.innerHTML = '🎉 Обновление уже вышло!';
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        daysEl.textContent = String(days).padStart(2, '0');
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+
+    update();
+    setInterval(update, 1000);
+}
+
+// Устанавливаем дату через 7 дней от текущего момента
+const now = new Date();
+const nextUpdate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+startCountdown(nextUpdate.getTime());
+
+// ========================
+// 10. КНОПКА "НАЖМИ МЕНЯ!"
+// ========================
+document.addEventListener('DOMContentLoaded', function() {
+    const heading = document.querySelector('h1');
+    if (heading && !document.getElementById('magic-button')) {
+        const button = document.createElement('button');
+        button.id = 'magic-button';
+        button.className = 'btn btn-magic';
+        button.textContent = '✨ Нажми меня!';
+        
+        button.addEventListener('click', function() {
+            const messages = [
+                '🎉 Отлично! Вы нажали на кнопку!',
+                '⭐ GitHub Pages — это круто!',
+                '🚀 Ваш сайт работает с JavaScript!',
+                '💡 Попробуйте обновить страницу!'
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
+        });
+        
+        heading.parentNode.insertBefore(button, heading.nextSibling);
+    }
+});
