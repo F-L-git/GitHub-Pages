@@ -263,9 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ========================
-// 12. ВИДЖЕТ ПОГОДЫ (OpenWeatherMap)
-// ========================
-// ========================
 // ВИДЖЕТ ПОГОДЫ (Open-Meteo — бесплатно, без ключа)
 // ========================
 async function fetchWeather() {
