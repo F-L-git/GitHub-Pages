@@ -291,3 +291,19 @@ async function fetchWeather() {
 
 // Вызовите функцию при загрузке
 document.addEventListener('DOMContentLoaded', fetchWeather);
+
+
+tsParticles.load("tsparticles", {
+    fpsLimit: 60,
+    particles: {
+        number: { value: 80 },
+        color: { value: ["#667eea", "#764ba2", "#f093fb"] },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: { min: 1, max: 5 } },
+        move: { enable: true, speed: 2 }
+    },
+    interactivity: {
+        events: { onHover: { enable: true, mode: "repulse" } }
+    }
+});
