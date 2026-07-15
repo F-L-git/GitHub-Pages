@@ -509,19 +509,6 @@ header {
     }
 }
 
-
-.btn-magic {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    padding: 0.8rem 2.5rem;
-    font-size: 1.2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(245, 87, 108, 0.5);
-    transition: all 0.3s ease;
-}
-.btn-magic:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 30px rgba(245, 87, 108, 0.7);
-}
 /* Пульсация */
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.4); }
