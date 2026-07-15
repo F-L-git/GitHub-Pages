@@ -352,3 +352,37 @@ body.dark-theme .progress-container {
 body.dark-theme .progress-bar {
     background: linear-gradient(90deg, #89b4fa, #667eea);
 }
+
+/* ===== TOAST-УВЕДОМЛЕНИЯ ===== */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.toast {
+    background: #2d3748;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    font-size: 1rem;
+    transform: translateX(120%);
+    opacity: 0;
+    animation: slideIn 0.5s forwards, fadeOut 0.5s 3s forwards;
+    max-width: 350px;
+    word-wrap: break-word;
+}
+body.dark-theme .toast {
+    background: #2a2a42;
+    color: #f0f0f0;
+}
+@keyframes slideIn {
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fadeOut {
+    to { transform: translateX(120%); opacity: 0; }
+}
