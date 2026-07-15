@@ -1,5 +1,5 @@
 // ========================
-// 1. ПРИВЕТСТВИЕ ПО ВРЕМЕНИ (исправлено)
+// 1. ПРИВЕТСТВИЕ ПО ВРЕМЕНИ
 // ========================
 function updateGreeting() {
     const now = new Date();
@@ -20,7 +20,6 @@ function updateGreeting() {
         greetingEl.textContent = greetingText + ' 👋';
     }
 
-    // Показываем текущее время
     const timeEl = document.getElementById('time-display');
     if (timeEl) {
         const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -31,19 +30,44 @@ updateGreeting();
 setInterval(updateGreeting, 1000);
 
 // ========================
-// 2. ПЕРЕКЛЮЧЕНИЕ ТЕМЫ (кнопка)
+// 2. АВТОМАТИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ПО ВРЕМЕНИ СУТОК
+// ========================
+function setAutoTheme() {
+    const hour = new Date().getHours();
+    // С 6 до 18 – светлая, иначе тёмная
+    const isDay = hour >= 6 && hour < 18;
+    if (isDay) {
+        document.body.classList.remove('dark-theme');
+    } else {
+        document.body.classList.add('dark-theme');
+    }
+    // Обновим иконку на кнопке
+    updateThemeButton();
+}
+setAutoTheme();
+
+// ========================
+// 3. РУЧНОЕ ПЕРЕКЛЮЧЕНИЕ (КНОПКА-ИКОНКА)
 // ========================
 const themeToggle = document.getElementById('theme-toggle');
+
+function updateThemeButton() {
+    if (!themeToggle) return;
+    const isDark = document.body.classList.contains('dark-theme');
+    // Меняем иконку и подсказку
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    themeToggle.title = isDark ? 'Включить светлую тему' : 'Включить тёмную тему';
+}
+
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-theme');
-        const isDark = document.body.classList.contains('dark-theme');
-        themeToggle.textContent = isDark ? '☀️ Светлая тема' : '🌙 Тёмная тема';
+        updateThemeButton();
     });
 }
 
 // ========================
-// 3. СЧЁТЧИК ПОСЕЩЕНИЙ
+// 4. СЧЁТЧИК ПОСЕЩЕНИЙ
 // ========================
 function updateVisitCounter() {
     let count = localStorage.getItem('pageVisits');
@@ -58,7 +82,7 @@ function updateVisitCounter() {
 updateVisitCounter();
 
 // ========================
-// 4. АККОРДЕОН (сворачивание разделов)
+// 5. АККОРДЕОН
 // ========================
 document.querySelectorAll('.section h2').forEach((header) => {
     header.style.cursor = 'pointer';
@@ -88,7 +112,7 @@ document.querySelectorAll('.section h2').forEach((header) => {
 });
 
 // ========================
-// 5. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ
+// 6. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ
 // ========================
 if ('IntersectionObserver' in window) {
     const sections = document.querySelectorAll('.section');
@@ -110,7 +134,7 @@ if ('IntersectionObserver' in window) {
 }
 
 // ========================
-// 6. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА (исправлен)
+// 7. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
 // ========================
 function startCountdown(targetDate) {
     const daysEl = document.getElementById('days');
@@ -124,7 +148,6 @@ function startCountdown(targetDate) {
         const distance = targetDate - now;
 
         if (distance < 0) {
-            // Время истекло
             countdownDiv.innerHTML = '🎉 Обновление уже вышло!';
             return;
         }
@@ -144,17 +167,13 @@ function startCountdown(targetDate) {
     setInterval(update, 1000);
 }
 
-// Устанавливаем дату следующего обновления на 7 дней вперед от текущего момента
-// (чтобы таймер всегда показывал что-то)
+// Устанавливаем дату через 7 дней от текущего момента
 const now = new Date();
-const nextUpdate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // +7 дней
-// Если хотите задать конкретную дату, раскомментируйте строку ниже и закомментируйте предыдущую:
-// const nextUpdate = new Date(2026, 6, 25, 18, 0, 0); // 25 июля 2026 18:00
-
+const nextUpdate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 startCountdown(nextUpdate.getTime());
 
 // ========================
-// 7. КНОПКА "НАЖМИ МЕНЯ!" (добавляется динамически)
+// 8. КНОПКА "НАЖМИ МЕНЯ!"
 // ========================
 document.addEventListener('DOMContentLoaded', function() {
     const heading = document.querySelector('h1');
