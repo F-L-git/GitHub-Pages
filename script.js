@@ -27,28 +27,21 @@ function updateGreeting() {
     }
 }
 
-// Запускаем приветствие сразу и обновляем каждую секунду
 updateGreeting();
 setInterval(updateGreeting, 1000);
 
 // ========================
-// 2. ПОЛУЧАЕМ КНОПКУ (ПРАВИЛЬНЫЙ ID)
+// 2. КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ
 // ========================
-const themeToggle = document.getElementById('theme-toggle'); // Обратите внимание: theme-toggle, а не themeToggle
+const themeToggle = document.getElementById('theme-toggle');
 
-// ========================
-// 3. ФУНКЦИЯ ОБНОВЛЕНИЯ ИКОНКИ КНОПКИ
-// ========================
 function updateThemeButton() {
-    if (!themeToggle) return; // если кнопки нет — выходим
+    if (!themeToggle) return;
     const isDark = document.body.classList.contains('dark-theme');
     themeToggle.textContent = isDark ? '☀️' : '🌙';
     themeToggle.title = isDark ? 'Включить светлую тему' : 'Включить тёмную тему';
 }
 
-// ========================
-// 4. АВТОМАТИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ПО ВРЕМЕНИ
-// ========================
 function setAutoTheme() {
     const hour = new Date().getHours();
     const isDay = hour >= 6 && hour < 18;
@@ -57,15 +50,11 @@ function setAutoTheme() {
     } else {
         document.body.classList.add('dark-theme');
     }
-    updateThemeButton(); // обновляем иконку
+    updateThemeButton();
 }
 
-// Запускаем авто-тему при загрузке
 setAutoTheme();
 
-// ========================
-// 5. РУЧНОЕ ПЕРЕКЛЮЧЕНИЕ ПО КЛИКУ НА КНОПКУ
-// ========================
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-theme');
@@ -74,7 +63,7 @@ if (themeToggle) {
 }
 
 // ========================
-// 6. АНИМИРОВАННЫЙ СЧЁТЧИК ПОСЕЩЕНИЙ
+// 3. АНИМИРОВАННЫЙ СЧЁТЧИК ПОСЕЩЕНИЙ
 // ========================
 function animateCounter(element, target, duration = 1500) {
     const start = 0;
@@ -103,16 +92,15 @@ function updateVisitCounter() {
     localStorage.setItem('pageVisits', count);
     const counterEl = document.getElementById('count');
     if (counterEl) {
-        // Сохраняем финальное значение, а затем анимируем от 0
         const finalCount = count;
-        counterEl.textContent = '0'; // начальное значение
-        animateCounter(counterEl, finalCount, 2000); // 2 секунды
+        counterEl.textContent = '0';
+        animateCounter(counterEl, finalCount, 2000);
     }
 }
 updateVisitCounter();
 
 // ========================
-// 7. АККОРДЕОН (раскрывающиеся разделы)
+// 4. АККОРДЕОН (раскрывающиеся разделы)
 // ========================
 document.querySelectorAll('.section h2').forEach((header) => {
     header.style.cursor = 'pointer';
@@ -129,7 +117,6 @@ document.querySelectorAll('.section h2').forEach((header) => {
     const content = section.querySelector('p, ul, ol');
     if (!content) return;
 
-    // По умолчанию все разделы, кроме первого, свернуты
     if (section.id !== 'about') {
         content.style.display = 'none';
         icon.textContent = ' ▸';
@@ -143,7 +130,7 @@ document.querySelectorAll('.section h2').forEach((header) => {
 });
 
 // ========================
-// 8. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ (Intersection Observer)
+// 5. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ (Intersection Observer)
 // ========================
 if ('IntersectionObserver' in window) {
     const sections = document.querySelectorAll('.section');
@@ -165,7 +152,7 @@ if ('IntersectionObserver' in window) {
 }
 
 // ========================
-// 9. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА (до обновления)
+// 6. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
 // ========================
 function startCountdown(targetDate) {
     const daysEl = document.getElementById('days');
@@ -174,7 +161,7 @@ function startCountdown(targetDate) {
     const secondsEl = document.getElementById('seconds');
     const countdownDiv = document.getElementById('countdown');
     const progressBar = document.getElementById('progress-bar');
-    const initialDuration = targetDate - new Date().getTime(); // запоминаем при старте
+    const initialDuration = targetDate - new Date().getTime();
 
     function update() {
         const now = new Date().getTime();
@@ -190,7 +177,7 @@ function startCountdown(targetDate) {
             if (progressBar) progressBar.style.width = '100%';
             return;
         }
-        
+
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -206,17 +193,13 @@ function startCountdown(targetDate) {
     setInterval(update, 1000);
 }
 
-// Устанавливаем дату через 7 дней от текущего момента
 const now = new Date();
 const nextUpdate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 startCountdown(nextUpdate.getTime());
 
 // ========================
-// 10. ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ (TOAST)
+// 7. ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ (TOAST)
 // ========================
-// ... остальной код ...
-
-// Всплывающие уведомления
 function showToast(message) {
     let container = document.getElementById('toast-container');
     if (!container) {
@@ -229,33 +212,17 @@ function showToast(message) {
     toast.className = 'toast';
     toast.textContent = message;
     container.appendChild(toast);
-    setTimeout(() => { if (toast.parentNode) toast.remove(); }, 3500);
+    setTimeout(() => {
+        if (toast.parentNode) toast.remove();
+    }, 3500);
 }
 
-// Обработчик для кнопки (после загрузки DOM)
-document.addEventListener('DOMContentLoaded', function() {
-    const magicBtn = document.getElementById('magic-button');
-    if (magicBtn) {
-        magicBtn.addEventListener('click', function() {
-            const messages = [
-                '🎉 Отлично!',
-                '⭐ GitHub Pages — круто!',
-                '🚀 JavaScript работает!',
-                '💡 Обновите страницу!'
-            ];
-            showToast(messages[Math.floor(Math.random() * messages.length)]);
-        });
-    }
-});
-
 // ========================
-// ВИДЖЕТ ПОГОДЫ (Open-Meteo — бесплатно, без ключа)
+// 8. ВИДЖЕТ ПОГОДЫ (Open-Meteo)
 // ========================
 async function fetchWeather() {
-    // Координаты Москвы (можно заменить на свой город)
     const lat = 55.7558;
     const lon = 37.6173;
-    // URL Open-Meteo API (текущая погода)
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
 
     try {
@@ -265,8 +232,6 @@ async function fetchWeather() {
 
         const temp = Math.round(data.current_weather.temperature);
         const weatherCode = data.current_weather.weathercode;
-
-        // Преобразуем код погоды в текст и иконку
         const weatherInfo = getWeatherInfo(weatherCode);
 
         document.getElementById('weather-temp').textContent = temp;
@@ -279,7 +244,6 @@ async function fetchWeather() {
     }
 }
 
-// Функция преобразования кода погоды Open-Meteo в текст и эмодзи
 function getWeatherInfo(code) {
     const weatherMap = {
         0: { emoji: '☀️', description: 'Ясно' },
@@ -307,11 +271,8 @@ function getWeatherInfo(code) {
     return weatherMap[code] || { emoji: '🌡️', description: 'Неизвестно' };
 }
 
-// Вызовите функцию при загрузке
-document.addEventListener('DOMContentLoaded', fetchWeather);
-
 // ========================
-// 13. ЧАСТИЦЫ ЗА КУРСОРОМ (Canvas)
+// 9. ЧАСТИЦЫ ЗА КУРСОРОМ (Canvas)
 // ========================
 (function initParticles() {
     const canvas = document.getElementById('particles-canvas');
@@ -325,7 +286,6 @@ document.addEventListener('DOMContentLoaded', fetchWeather);
     const MAX_SPEED = 3;
     const ATTRACTION = 0.05;
 
-    // ---- Настройка размеров canvas ----
     function resizeCanvas() {
         width = window.innerWidth;
         height = window.innerHeight;
@@ -335,27 +295,22 @@ document.addEventListener('DOMContentLoaded', fetchWeather);
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // ---- Класс частицы ----
     class Particle {
         constructor() {
             this.reset();
         }
-
         reset() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.size = Math.random() * 4 + 2; // размер от 2 до 6
+            this.size = Math.random() * 4 + 2;
             this.speedX = (Math.random() - 0.5) * 2;
             this.speedY = (Math.random() - 0.5) * 2;
-            // Цвет: оттенок сине-фиолетового
-            this.hue = Math.random() * 40 + 220; // 220–260 (сине-фиолетовый)
+            this.hue = Math.random() * 40 + 220;
             this.saturation = 80;
             this.lightness = 70;
             this.opacity = Math.random() * 0.5 + 0.3;
         }
-
         update() {
-            // Если курсор на экране – притягиваемся к нему
             if (mouse.x !== null && mouse.y !== null) {
                 const dx = mouse.x - this.x;
                 const dy = mouse.y - this.y;
@@ -366,29 +321,20 @@ document.addEventListener('DOMContentLoaded', fetchWeather);
                     this.speedY += dy * force * 0.02;
                 }
             }
-
-            // Ограничиваем скорость
             const speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
             if (speed > MAX_SPEED) {
                 this.speedX = (this.speedX / speed) * MAX_SPEED;
                 this.speedY = (this.speedY / speed) * MAX_SPEED;
             }
-
-            // Двигаем
             this.x += this.speedX;
             this.y += this.speedY;
-
-            // Затухание скорости (трение)
             this.speedX *= 0.98;
             this.speedY *= 0.98;
-
-            // Если частица вышла за границы – возвращаем с другой стороны
             if (this.x < 0) this.x = width;
             if (this.x > width) this.x = 0;
             if (this.y < 0) this.y = height;
             if (this.y > height) this.y = 0;
         }
-
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -397,12 +343,10 @@ document.addEventListener('DOMContentLoaded', fetchWeather);
         }
     }
 
-    // ---- Создаём частицы ----
     for (let i = 0; i < PARTICLE_COUNT; i++) {
         particles.push(new Particle());
     }
 
-    // ---- Отслеживание мыши ----
     function onMouseMove(event) {
         mouse.x = event.clientX;
         mouse.y = event.clientY;
@@ -414,7 +358,6 @@ document.addEventListener('DOMContentLoaded', fetchWeather);
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseleave', onMouseLeave);
 
-    // ---- Анимационный цикл ----
     function animate() {
         ctx.clearRect(0, 0, width, height);
         particles.forEach(p => {
@@ -425,27 +368,15 @@ document.addEventListener('DOMContentLoaded', fetchWeather);
     }
     animate();
 
-    // ---- Очистка при перезагрузке (опционально) ----
     window.addEventListener('beforeunload', () => {
         window.removeEventListener('mousemove', onMouseMove);
         window.removeEventListener('mouseleave', onMouseLeave);
     });
 })();
 
-// Кнопка "Наверх"
-const scrollBtn = document.getElementById('scroll-top');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        scrollBtn.classList.add('show');
-    } else {
-        scrollBtn.classList.remove('show');
-    }
-});
-scrollBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Динамический заголовок
+// ========================
+// 10. ДИНАМИЧЕСКИЙ ЗАГОЛОВОК ВКЛАДКИ
+// ========================
 let originalTitle = document.title;
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
@@ -454,5 +385,25 @@ document.addEventListener('visibilitychange', () => {
         document.title = originalTitle;
     }
 });
-// Обновляем оригинальный заголовок при изменении (если нужно)
-// Можно также обновлять приветствие, но это опционально.
+
+// ========================
+// 11. ОБРАБОТЧИКИ ПОСЛЕ ЗАГРУЗКИ DOM
+// ========================
+document.addEventListener('DOMContentLoaded', function() {
+    // Кнопка "Нажми меня!"
+    const magicBtn = document.getElementById('magic-button');
+    if (magicBtn) {
+        magicBtn.addEventListener('click', function() {
+            const messages = [
+                '🎉 Отлично!',
+                '⭐ GitHub Pages — круто!',
+                '🚀 JavaScript работает!',
+                '💡 Обновите страницу!'
+            ];
+            showToast(messages[Math.floor(Math.random() * messages.length)]);
+        });
+    }
+
+    // Погода
+    fetchWeather();
+});
