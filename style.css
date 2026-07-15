@@ -1,13 +1,12 @@
 /* ===== ОБЩИЕ СБРОСЫ ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* ===== ШРИФТ ===== */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f5f7fa;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     color: #2d3748;
     transition: background 0.3s ease, color 0.3s ease;
     min-height: 100vh;
@@ -17,6 +16,20 @@ body {
     padding: 1rem;
 }
 
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body.dark-theme {
+    background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #d4d4e0;
+}
+
+/* ===== КОНТЕЙНЕР ===== */
 .container {
     max-width: 1000px;
     width: 100%;
@@ -26,29 +39,70 @@ body {
     padding: 2rem 2.5rem;
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
+body.dark-theme .container {
+    background: #1e1e2e;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+}
 
 /* ===== ШАПКА ===== */
 header {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
     margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeInDown 0.8s ease forwards;
+}
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
-header h1 {
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.header-left {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+.header-left h1 {
     font-size: 2.2rem;
+    margin: 0;
     color: #2d3748;
     transition: color 0.3s ease;
 }
-
-#time-display {
+body.dark-theme .header-left h1 {
+    color: #f0f0ff;
+}
+.header-left #time-display {
     font-size: 1.3rem;
-    font-weight: 500;
     color: #4a5568;
+    margin: 0;
+}
+body.dark-theme #time-display {
+    color: #b0b0c8;
 }
 
-/* ===== КНОПКИ ===== */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+/* ===== КНОПКИ (общие) ===== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -72,16 +126,20 @@ header h1 {
     box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
 }
 
-/* Кнопка переключения темы (иконка) */
+/* Кнопка переключения темы */
 #theme-toggle {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 #theme-toggle:hover {
     transform: scale(1.1) rotate(10deg);
 }
+body.dark-theme #theme-toggle {
+    background: linear-gradient(135deg, #4a4a6a 0%, #2d2d44 100%);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    color: #e0e0e0;
+}
 
-/* Кнопка "Нажми меня!" – прямоугольная с мягкими краями */
-/* Кнопка "Нажми меня!" – светлая тема */
+/* Кнопка "Нажми меня!" */
 .btn-magic {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
@@ -91,38 +149,40 @@ header h1 {
     font-size: 1.1rem;
     width: auto;
     height: auto;
-    margin: 1rem 0 1.5rem 0;
+    margin: 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: pulse 2s infinite; /* оставляем пульсацию */
+    animation: pulse 2s infinite;
 }
 .btn-magic:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
 }
-
-/* Кнопка "Нажми меня!" – тёмная тема */
 body.dark-theme .btn-magic {
     background: linear-gradient(135deg, #4a4a6a 0%, #2d2d44 100%);
     color: #f0f0f0;
 }
 
-/* Пульсация – обновлённый цвет */
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4); }
     70% { box-shadow: 0 0 0 15px rgba(102, 126, 234, 0); }
     100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
 }
+
 /* ===== ТАЙМЕР ===== */
 .countdown-container {
     background: #f0f4ff;
     border-radius: 12px;
     padding: 1rem 1.5rem;
     text-align: center;
-    margin: 1.5rem 0;
+    margin: 0;
     border: 1px solid #e2e8f0;
     transition: background 0.3s ease, border-color 0.3s ease;
+    flex: 1;
 }
-
+body.dark-theme .countdown-container {
+    background: #2a2a42;
+    border-color: #4a4a6a;
+}
 #countdown {
     font-size: 2.2rem;
     font-weight: 700;
@@ -130,220 +190,11 @@ body.dark-theme .btn-magic {
     letter-spacing: 2px;
     transition: color 0.3s ease;
 }
-
-/* ===== КОНТЕНТ ===== */
-.content {
-    margin: 2rem 0;
-}
-
-.section {
-    background: #f7fafc;
-    border-left: 4px solid #667eea;
-    padding: 1.5rem 2rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    transition: background 0.3s ease, border-color 0.3s ease;
-}
-
-.section h2 {
-    color: #2d3748;
-    font-size: 1.6rem;
-    margin-bottom: 0.8rem;
-    transition: color 0.3s ease;
-}
-
-/* ===== АБЗАЦЫ – КРУПНЫЕ, ЧИТАЕМЫЕ ===== */
-.section p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    max-width: 90%;
-    margin: 0.8rem auto;
-    color: #2d3748;
-    transition: color 0.3s ease;
-}
-
-.section ul,
-.section ol {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    padding-left: 2rem;
-    color: #2d3748;
-    transition: color 0.3s ease;
-}
-.section li {
-    margin-bottom: 0.4rem;
-}
-
-.section a {
-    color: #667eea;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-.section a:hover {
-    text-decoration: underline;
-}
-
-/* ===== БЛОКИ КОДА ===== */
-pre {
-    background: #f0f4f8;
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
-    overflow-x: auto;
-    font-family: 'Courier New', monospace;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    border: 1px solid #e2e8f0;
-    transition: background 0.3s ease, border-color 0.3s ease;
-}
-code {
-    font-family: 'Courier New', monospace;
-    background: #edf2f7;
-    padding: 0.1rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    transition: background 0.3s ease;
-}
-
-/* ===== ФУТЕР ===== */
-footer {
-    border-top: 1px solid #e2e8f0;
-    padding-top: 1.2rem;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    color: #4a5568;
-    transition: border-color 0.3s ease, color 0.3s ease;
-    font-size: 1.1rem;
-}
-
-/* ===== ТЁМНАЯ ТЕМА ===== */
-body.dark-theme {
-    background: #12121a;
-    color: #d4d4e0;
-}
-
-body.dark-theme .container {
-    background: #1e1e2e;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
-}
-
-body.dark-theme header h1 {
-    color: #f0f0ff;
-}
-
-body.dark-theme #time-display {
-    color: #b0b0c8;
-}
-
-body.dark-theme #theme-toggle {
-    background: linear-gradient(135deg, #4a4a6a 0%, #2d2d44 100%);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    color: #e0e0e0;
-}
-
-body.dark-theme .btn-magic {
-    background: linear-gradient(135deg, #6a4a7a 0%, #a0556a 100%);
-    color: #f0f0f0;
-}
-
-body.dark-theme .countdown-container {
-    background: #2a2a42;
-    border-color: #4a4a6a;
-}
-
 body.dark-theme #countdown {
     color: #89b4fa;
 }
 
-body.dark-theme .section {
-    background: #25253a;
-    border-left-color: #667eea;
-}
-
-body.dark-theme .section h2 {
-    color: #c8c8f0;
-}
-
-body.dark-theme .section p,
-body.dark-theme .section ul,
-body.dark-theme .section ol {
-    color: #d0d0e8;
-}
-
-body.dark-theme .section a {
-    color: #89b4fa;
-}
-
-body.dark-theme pre {
-    background: #2a2a42;
-    border-color: #4a4a6a;
-}
-body.dark-theme code {
-    background: #3a3a52;
-    color: #d4d4e0;
-}
-
-body.dark-theme footer {
-    border-top-color: #3a3a52;
-    color: #a0a0b8;
-}
-
-/* ===== АДАПТИВНОСТЬ ===== */
-@media (max-width: 640px) {
-    .container {
-        padding: 1.5rem;
-    }
-    header {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.5rem;
-    }
-    #countdown {
-        font-size: 1.6rem;
-    }
-    .btn {
-        width: 3rem;
-        height: 3rem;
-        font-size: 1.4rem;
-        align-self: flex-end;
-    }
-    .btn-magic {
-        width: 100%;
-        text-align: center;
-        border-radius: 10px;   /* теперь и на телефоне прямоугольная */
-    }
-    .section p {
-        font-size: 1.1rem;
-        max-width: 100%;
-    }
-    .section ul,
-    .section ol {
-        font-size: 1rem;
-    }
-}
-
-/* ===== АНИМИРОВАННЫЙ ФОН (ГРАДИЕНТ) ===== */
-body {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    min-height: 100vh;
-}
-
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Для тёмной темы – можно оставить тот же фон, но с затемнением или отдельным */
-body.dark-theme {
-    background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-}
-
-/* ===== ПРОГРЕСС-БАР ===== */
+/* ===== ПРОГРЕСС-БАР (внутри таймера) ===== */
 .progress-container {
     width: 100%;
     background: #e2e8f0;
@@ -365,6 +216,209 @@ body.dark-theme .progress-container {
 }
 body.dark-theme .progress-bar {
     background: linear-gradient(90deg, #89b4fa, #667eea);
+}
+
+/* ===== КОНТЕНТ (секции) ===== */
+.content { margin: 2rem 0; }
+.section {
+    background: #f7fafc;
+    border-left: 4px solid #667eea;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+body.dark-theme .section {
+    background: #25253a;
+    border-left-color: #667eea;
+}
+.section h2 {
+    color: #2d3748;
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+    transition: color 0.3s ease;
+}
+body.dark-theme .section h2 {
+    color: #c8c8f0;
+}
+.section p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    max-width: 90%;
+    margin: 0.8rem auto;
+    color: #2d3748;
+    transition: color 0.3s ease;
+}
+body.dark-theme .section p,
+body.dark-theme .section ul,
+body.dark-theme .section ol {
+    color: #d0d0e8;
+}
+.section ul, .section ol {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    padding-left: 2rem;
+    color: #2d3748;
+    transition: color 0.3s ease;
+}
+.section li { margin-bottom: 0.4rem; }
+.section a {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.section a:hover { text-decoration: underline; }
+body.dark-theme .section a { color: #89b4fa; }
+
+/* ===== БЛОКИ КОДА ===== */
+pre {
+    background: #f0f4f8;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border: 1px solid #e2e8f0;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+code {
+    font-family: 'Courier New', monospace;
+    background: #edf2f7;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
+}
+body.dark-theme pre {
+    background: #2a2a42;
+    border-color: #4a4a6a;
+}
+body.dark-theme code {
+    background: #3a3a52;
+    color: #d4d4e0;
+}
+
+/* ===== ВИДЖЕТ ПОГОДЫ ===== */
+.weather-widget {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(5px);
+    padding: 0.3rem 1.2rem;
+    border-radius: 40px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: background 0.3s ease;
+}
+.weather-widget #weather-icon { font-size: 1.4rem; }
+body.dark-theme .weather-widget {
+    background: rgba(30,30,46,0.8);
+    color: #d4d4e0;
+}
+
+/* ===== ФУТЕР ===== */
+footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    color: #4a5568;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    font-size: 1.1rem;
+}
+body.dark-theme footer {
+    border-top-color: #3a3a52;
+    color: #a0a0b8;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 640px) {
+    .container { padding: 1.5rem; }
+    .header-top {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    .header-left {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .header-right {
+        justify-content: space-between;
+    }
+    .header-bottom {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn { width: 3rem; height: 3rem; font-size: 1.4rem; align-self: flex-end; }
+    .btn-magic { width: 100%; text-align: center; border-radius: 10px; }
+    #countdown { font-size: 1.6rem; }
+    .section p { font-size: 1.1rem; max-width: 100%; }
+    .section ul, .section ol { font-size: 1rem; }
+    .weather-widget { font-size: 0.9rem; padding: 0.3rem 0.8rem; }
+}
+
+/* ===== КАСТОМНЫЙ КУРСОР (добавить если используется) ===== */
+#cursor-dot {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(102, 126, 234, 0.6);
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s, background 0.2s;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+#cursor-dot.hover {
+    transform: translate(-50%, -50%) scale(2);
+    background: rgba(245, 87, 108, 0.8);
+}
+
+/* ===== КНОПКА "НАВЕРХ" ===== */
+#scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+}
+#scroll-top.show {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+#scroll-top:hover {
+    transform: scale(1.1) rotate(10deg);
+}
+body.dark-theme #scroll-top {
+    background: linear-gradient(135deg, #4a4a6a, #2d2d44);
+}
+
+/* ===== ЧАСТИЦЫ (холст) ===== */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* ===== TOAST-УВЕДОМЛЕНИЯ ===== */
@@ -399,173 +453,4 @@ body.dark-theme .toast {
 }
 @keyframes fadeOut {
     to { transform: translateX(120%); opacity: 0; }
-}
-
-/* ===== ВИДЖЕТ ПОГОДЫ ===== */
-.weather-widget {
-    background: rgba(255,255,255,0.8);
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: background 0.3s ease;
-}
-body.dark-theme .weather-widget {
-    background: rgba(30,30,46,0.8);
-    color: #d4d4e0;
-}
-@media (max-width: 640px) {
-    .weather-widget {
-        font-size: 0.9rem;
-        padding: 0.3rem 0.8rem;
-    }
-}
-
-/* ===== ЧАСТИЦЫ (холст) ===== */
-#particles-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* чтобы не мешать кликам по кнопкам */
-    z-index: 0;           /* под контентом, но над фоном */
-}
-
-/* ===== ШАПКА ===== */
-header {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.header-left {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-}
-
-.header-left h1 {
-    font-size: 2.2rem;
-    margin: 0;
-}
-
-.header-left #time-display {
-    font-size: 1.3rem;
-    color: #4a5568;
-    margin: 0;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.weather-widget {
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(5px);
-    padding: 0.3rem 1.2rem;
-    border-radius: 40px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-}
-.weather-widget #weather-icon {
-    font-size: 1.4rem;
-}
-
-.header-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.5rem;
-    margin-top: 0.5rem;
-}
-
-/* Адаптивность */
-@media (max-width: 640px) {
-    .header-top {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.5rem;
-    }
-    .header-left {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .header-right {
-        justify-content: space-between;
-    }
-    .header-bottom {
-        flex-direction: column;
-        align-items: stretch;
-    }
-}
-
-/* Пульсация */
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.4); }
-    70% { box-shadow: 0 0 0 15px rgba(245, 87, 108, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0); }
-}
-.btn-magic {
-    animation: pulse 2s infinite;
-}
-
-header {
-    opacity: 0;
-    animation: fadeInDown 0.8s ease forwards;
-}
-@keyframes fadeInDown {
-    0% { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-body {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-}
-
-#scroll-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1000;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
-    font-size: 1.8rem;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
-    opacity: 0;
-    transform: scale(0.5);
-    transition: opacity 0.3s, transform 0.3s;
-    pointer-events: none;
-}
-#scroll-top.show {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
-}
-#scroll-top:hover {
-    transform: scale(1.1) rotate(10deg);
-}
-body.dark-theme #scroll-top {
-    background: linear-gradient(135deg, #4a4a6a, #2d2d44);
 }
