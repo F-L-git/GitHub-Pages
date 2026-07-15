@@ -26,26 +26,28 @@ function updateGreeting() {
         timeEl.textContent = '🕐 ' + now.toLocaleTimeString('ru-RU', options);
     }
 }
+
+// Запускаем приветствие сразу и обновляем каждую секунду
 updateGreeting();
 setInterval(updateGreeting, 1000);
 
 // ========================
-// 2. ПОЛУЧАЕМ КНОПКУ СРАЗУ (ПЕРЕД ИСПОЛЬЗОВАНИЕМ)
+// 2. ПОЛУЧАЕМ КНОПКУ (ПРАВИЛЬНЫЙ ID)
 // ========================
-const themeToggle = document.getElementById('theme-toggle');
+const themeToggle = document.getElementById('theme-toggle'); // Обратите внимание: theme-toggle, а не themeToggle
 
 // ========================
 // 3. ФУНКЦИЯ ОБНОВЛЕНИЯ ИКОНКИ КНОПКИ
 // ========================
 function updateThemeButton() {
-    if (!themeToggle) return; // если кнопка не найдена, выходим
+    if (!themeToggle) return; // если кнопки нет — выходим
     const isDark = document.body.classList.contains('dark-theme');
     themeToggle.textContent = isDark ? '☀️' : '🌙';
     themeToggle.title = isDark ? 'Включить светлую тему' : 'Включить тёмную тему';
 }
 
 // ========================
-// 4. АВТОМАТИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ПО ВРЕМЕНИ СУТОК
+// 4. АВТОМАТИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ПО ВРЕМЕНИ
 // ========================
 function setAutoTheme() {
     const hour = new Date().getHours();
@@ -55,12 +57,14 @@ function setAutoTheme() {
     } else {
         document.body.classList.add('dark-theme');
     }
-    updateThemeButton(); // теперь themeToggle уже существует
+    updateThemeButton(); // обновляем иконку
 }
+
+// Запускаем авто-тему при загрузке
 setAutoTheme();
 
 // ========================
-// 5. РУЧНОЕ ПЕРЕКЛЮЧЕНИЕ ПО КЛИКУ
+// 5. РУЧНОЕ ПЕРЕКЛЮЧЕНИЕ ПО КЛИКУ НА КНОПКУ
 // ========================
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
@@ -70,7 +74,7 @@ if (themeToggle) {
 }
 
 // ========================
-// 6. СЧЁТЧИК ПОСЕЩЕНИЙ
+// 6. СЧЁТЧИК ПОСЕЩЕНИЙ (localStorage)
 // ========================
 function updateVisitCounter() {
     let count = localStorage.getItem('pageVisits');
@@ -80,12 +84,15 @@ function updateVisitCounter() {
         count = parseInt(count) + 1;
     }
     localStorage.setItem('pageVisits', count);
-    document.getElementById('count').textContent = count;
+    const counterEl = document.getElementById('count');
+    if (counterEl) {
+        counterEl.textContent = count;
+    }
 }
 updateVisitCounter();
 
 // ========================
-// 7. АККОРДЕОН
+// 7. АККОРДЕОН (раскрывающиеся разделы)
 // ========================
 document.querySelectorAll('.section h2').forEach((header) => {
     header.style.cursor = 'pointer';
@@ -102,6 +109,7 @@ document.querySelectorAll('.section h2').forEach((header) => {
     const content = section.querySelector('p, ul, ol');
     if (!content) return;
 
+    // По умолчанию все разделы, кроме первого, свернуты
     if (section.id !== 'about') {
         content.style.display = 'none';
         icon.textContent = ' ▸';
@@ -115,7 +123,7 @@ document.querySelectorAll('.section h2').forEach((header) => {
 });
 
 // ========================
-// 8. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ
+// 8. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ (Intersection Observer)
 // ========================
 if ('IntersectionObserver' in window) {
     const sections = document.querySelectorAll('.section');
@@ -137,7 +145,7 @@ if ('IntersectionObserver' in window) {
 }
 
 // ========================
-// 9. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
+// 9. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА (до обновления)
 // ========================
 function startCountdown(targetDate) {
     const daysEl = document.getElementById('days');
@@ -176,7 +184,7 @@ const nextUpdate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 startCountdown(nextUpdate.getTime());
 
 // ========================
-// 10. КНОПКА "НАЖМИ МЕНЯ!"
+// 10. КНОПКА "НАЖМИ МЕНЯ!" (добавляется динамически)
 // ========================
 document.addEventListener('DOMContentLoaded', function() {
     const heading = document.querySelector('h1');
