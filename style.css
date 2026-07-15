@@ -1,4 +1,4 @@
-/* Общие сбросы */
+/* ===== ОБЩИЕ СБРОСЫ ===== */
 * {
     margin: 0;
     padding: 0;
@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-    max-width: 1000px; /* чуть шире для читаемости */
+    max-width: 1000px;
     width: 100%;
     background: #ffffff;
     border-radius: 20px;
@@ -27,6 +27,7 @@ body {
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* ===== ШАПКА ===== */
 header {
     display: flex;
     flex-wrap: wrap;
@@ -47,16 +48,16 @@ header h1 {
     color: #4a5568;
 }
 
-/* Кнопки – база */
+/* ===== КНОПКИ ===== */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0.6rem 0.8rem;
-    font-size: 1.6rem; /* увеличен для иконки */
+    font-size: 1.6rem;
     font-weight: 400;
     border: none;
-    border-radius: 50%; /* круглая кнопка-иконка */
+    border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     width: 3.2rem;
@@ -71,7 +72,7 @@ header h1 {
     box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
 }
 
-/* Специфика для кнопки переключения темы (иконка) */
+/* Кнопка переключения темы (иконка) */
 #theme-toggle {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
@@ -79,12 +80,12 @@ header h1 {
     transform: scale(1.1) rotate(10deg);
 }
 
-/* Кнопка "Нажми меня!" – остаётся текстовой, но стилизована */
+/* Кнопка "Нажми меня!" – прямоугольная с мягкими краями */
 .btn-magic {
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     color: #fff;
     box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
-    border-radius: 10px;        /* ← мягкие края, но прямоугольная */
+    border-radius: 10px;          /* ← мягкие края, но прямоугольная */
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
     width: auto;
@@ -97,7 +98,7 @@ header h1 {
     box-shadow: 0 6px 25px rgba(245, 87, 108, 0.6);
 }
 
-/* Таймер */
+/* ===== ТАЙМЕР ===== */
 .countdown-container {
     background: #f0f4ff;
     border-radius: 12px;
@@ -116,7 +117,7 @@ header h1 {
     transition: color 0.3s ease;
 }
 
-/* ===== КРАСИВОЕ ОФОРМЛЕНИЕ ВСЕХ АБЗАЦЕВ ===== */
+/* ===== КОНТЕНТ ===== */
 .content {
     margin: 2rem 0;
 }
@@ -137,18 +138,18 @@ header h1 {
     transition: color 0.3s ease;
 }
 
-/* ===== АБЗАЦЫ – ШИРОКИЕ, КРУПНЫЕ, ЧИТАЕМЫЕ ===== */
+/* ===== АБЗАЦЫ – КРУПНЫЕ, ЧИТАЕМЫЕ ===== */
 .section p {
-    font-size: 1.2rem;        /* крупный */
-    line-height: 1.8;         /* межстрочный интервал */
-    max-width: 90%;           /* не вплотную к краям */
-    margin: 0.8rem auto;      /* центрируем и добавляем отступы */
+    font-size: 1.2rem;
+    line-height: 1.8;
+    max-width: 90%;
+    margin: 0.8rem auto;
     color: #2d3748;
     transition: color 0.3s ease;
 }
 
-/* Также для списков – сделаем удобочитаемыми */
-.section ul, .section ol {
+.section ul,
+.section ol {
     font-size: 1.15rem;
     line-height: 1.8;
     padding-left: 2rem;
@@ -168,7 +169,28 @@ header h1 {
     text-decoration: underline;
 }
 
-/* Футер */
+/* ===== БЛОКИ КОДА ===== */
+pre {
+    background: #f0f4f8;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border: 1px solid #e2e8f0;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+code {
+    font-family: 'Courier New', monospace;
+    background: #edf2f7;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
+}
+
+/* ===== ФУТЕР ===== */
 footer {
     border-top: 1px solid #e2e8f0;
     padding-top: 1.2rem;
@@ -180,7 +202,7 @@ footer {
     font-size: 1.1rem;
 }
 
-/* ===== ТЁМНАЯ ТЕМА (полная) ===== */
+/* ===== ТЁМНАЯ ТЕМА ===== */
 body.dark-theme {
     background: #12121a;
     color: #d4d4e0;
@@ -201,7 +223,7 @@ body.dark-theme #time-display {
 
 body.dark-theme #theme-toggle {
     background: linear-gradient(135deg, #4a4a6a 0%, #2d2d44 100%);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     color: #e0e0e0;
 }
 
@@ -238,6 +260,15 @@ body.dark-theme .section a {
     color: #89b4fa;
 }
 
+body.dark-theme pre {
+    background: #2a2a42;
+    border-color: #4a4a6a;
+}
+body.dark-theme code {
+    background: #3a3a52;
+    color: #d4d4e0;
+}
+
 body.dark-theme footer {
     border-top-color: #3a3a52;
     color: #a0a0b8;
@@ -265,64 +296,14 @@ body.dark-theme footer {
     .btn-magic {
         width: 100%;
         text-align: center;
-        border-radius: 50px;
+        border-radius: 10px;   /* теперь и на телефоне прямоугольная */
     }
     .section p {
         font-size: 1.1rem;
         max-width: 100%;
     }
-    .section ul, .section ol {
+    .section ul,
+    .section ol {
         font-size: 1rem;
     }
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.6rem 0.8rem;
-    font-size: 1.6rem;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 3.2rem;
-    height: 3.2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    line-height: 1;
-}
-.btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
-}
-
-/* ===== Блоки кода ===== */
-pre {
-    background: #f0f4f8;
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
-    overflow-x: auto;
-    font-family: 'Courier New', monospace;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    border: 1px solid #e2e8f0;
-    transition: background 0.3s ease, border-color 0.3s ease;
-}
-code {
-    font-family: 'Courier New', monospace;
-    background: #edf2f7;
-    padding: 0.1rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    transition: background 0.3s ease;
-}
-body.dark-theme pre {
-    background: #2a2a42;
-    border-color: #4a4a6a;
-}
-body.dark-theme code {
-    background: #3a3a52;
-    color: #d4d4e0;
 }
