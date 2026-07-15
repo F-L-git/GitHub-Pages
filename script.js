@@ -183,10 +183,10 @@ function startCountdown(targetDate) {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        daysEl.textContent = String(days).padStart(2, '0');
-        hoursEl.textContent = String(hours).padStart(2, '0');
-        minutesEl.textContent = String(minutes).padStart(2, '0');
-        secondsEl.textContent = String(seconds).padStart(2, '0');
+        if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
     }
 
     update();
@@ -234,13 +234,19 @@ async function fetchWeather() {
         const weatherCode = data.current_weather.weathercode;
         const weatherInfo = getWeatherInfo(weatherCode);
 
-        document.getElementById('weather-temp').textContent = temp;
-        document.getElementById('weather-desc').textContent = weatherInfo.description;
-        document.getElementById('weather-icon').textContent = weatherInfo.emoji;
+        const tempEl = document.getElementById('weather-temp');
+        const descEl = document.getElementById('weather-desc');
+        const iconEl = document.getElementById('weather-icon');
+
+        if (tempEl) tempEl.textContent = temp;
+        if (descEl) descEl.textContent = weatherInfo.description;
+        if (iconEl) iconEl.textContent = weatherInfo.emoji;
     } catch (error) {
         console.error('Ошибка получения погоды:', error);
-        document.getElementById('weather-desc').textContent = 'недоступно';
-        document.getElementById('weather-icon').textContent = '🌧️';
+        const descEl = document.getElementById('weather-desc');
+        const iconEl = document.getElementById('weather-icon');
+        if (descEl) descEl.textContent = 'недоступно';
+        if (iconEl) iconEl.textContent = '🌧️';
     }
 }
 
