@@ -454,3 +454,14 @@ body.dark-theme .toast {
 @keyframes fadeOut {
     to { transform: translateX(120%); opacity: 0; }
 }
+
+#reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    z-index: 10000;
+    width: 0%;
+    transition: width 0.1s;
+}
