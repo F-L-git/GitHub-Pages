@@ -223,17 +223,15 @@ function updateMapPopup(lang) {
 function updateGreeting() {
     const now = new Date();
     const hour = now.getHours();
-    let greetingText = '';
-    if (hour >= 0 && hour < 6) {
-        greetingText = 'Доброй ночи!';
-    } else if (hour >= 6 && hour < 12) {
-        greetingText = 'Доброе утро!';
-    } else if (hour >= 12 && hour < 18) {
-        greetingText = 'Добрый день!';
-    } else {
-        greetingText = 'Добрый вечер!';
-    }
-    
+    let greetingIndex;
+    if (hour >= 0 && hour < 6) greetingIndex = 0;
+    else if (hour >= 6 && hour < 12) greetingIndex = 1;
+    else if (hour >= 12 && hour < 18) greetingIndex = 2;
+    else greetingIndex = 3;
+
+    const t = translations[currentLang];
+    const greetingText = t.greeting[greetingIndex];
+
     const greetingEl = document.getElementById('greeting');
     if (greetingEl) {
         greetingEl.textContent = greetingText + ' 👋';
@@ -242,7 +240,7 @@ function updateGreeting() {
     const timeEl = document.getElementById('time-display');
     if (timeEl) {
         const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        timeEl.textContent = '🕐 ' + now.toLocaleTimeString('ru-RU', options);
+        timeEl.textContent = t.timePrefix + ' ' + now.toLocaleTimeString('ru-RU', options);
     }
 }
 
