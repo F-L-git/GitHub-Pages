@@ -647,3 +647,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Погода
     fetchWeather();
 });
+
+// Установить язык при загрузке
+setLanguage(currentLang);
