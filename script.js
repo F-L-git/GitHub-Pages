@@ -1,14 +1,19 @@
 // ========================
-// 1. ПРИВЕТСТВИЕ ПО ВРЕМЕНИ
+// 1. ПРИВЕТСТВИЕ ПО ВРЕМЕНИ (исправлено)
 // ========================
 function updateGreeting() {
     const now = new Date();
     const hour = now.getHours();
     let greetingText = '';
-    if (hour < 6) greetingText = '🌙 Доброй ночи!';
-    else if (hour < 12) greetingText = '🌅 Доброе утро!';
-    else if (hour < 18) greetingText = '☀️ Добрый день!';
-    else greetingText = '🌇 Добрый вечер!';
+    if (hour >= 0 && hour < 6) {
+        greetingText = 'Доброй ночи!';
+    } else if (hour >= 6 && hour < 12) {
+        greetingText = 'Доброе утро!';
+    } else if (hour >= 12 && hour < 18) {
+        greetingText = 'Добрый день!';
+    } else {
+        greetingText = 'Добрый вечер!';
+    }
     
     const greetingEl = document.getElementById('greeting');
     if (greetingEl) {
@@ -23,10 +28,10 @@ function updateGreeting() {
     }
 }
 updateGreeting();
-setInterval(updateGreeting, 1000); // обновляем каждую секунду
+setInterval(updateGreeting, 1000);
 
 // ========================
-// 2. ПЕРЕКЛЮЧЕНИЕ ТЕМЫ
+// 2. ПЕРЕКЛЮЧЕНИЕ ТЕМЫ (кнопка)
 // ========================
 const themeToggle = document.getElementById('theme-toggle');
 if (themeToggle) {
@@ -38,7 +43,7 @@ if (themeToggle) {
 }
 
 // ========================
-// 3. СЧЁТЧИК ПОСЕЩЕНИЙ (localStorage)
+// 3. СЧЁТЧИК ПОСЕЩЕНИЙ
 // ========================
 function updateVisitCounter() {
     let count = localStorage.getItem('pageVisits');
@@ -56,13 +61,11 @@ updateVisitCounter();
 // 4. АККОРДЕОН (сворачивание разделов)
 // ========================
 document.querySelectorAll('.section h2').forEach((header) => {
-    // Делаем заголовок кликабельным
     header.style.cursor = 'pointer';
     header.style.userSelect = 'none';
     header.style.display = 'flex';
     header.style.alignItems = 'center';
     header.style.justifyContent = 'space-between';
-    // Добавляем иконку-индикатор
     const icon = document.createElement('span');
     icon.textContent = ' ▾';
     icon.style.fontSize = '1.2rem';
@@ -72,7 +75,6 @@ document.querySelectorAll('.section h2').forEach((header) => {
     const content = section.querySelector('p, ul, ol');
     if (!content) return;
 
-    // Скрываем контент по умолчанию (кроме первого раздела)
     if (section.id !== 'about') {
         content.style.display = 'none';
         icon.textContent = ' ▸';
@@ -86,7 +88,7 @@ document.querySelectorAll('.section h2').forEach((header) => {
 });
 
 // ========================
-// 5. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ (Intersection Observer)
+// 5. АНИМАЦИЯ ПРИ ПОЯВЛЕНИИ
 // ========================
 if ('IntersectionObserver' in window) {
     const sections = document.querySelectorAll('.section');
@@ -105,15 +107,17 @@ if ('IntersectionObserver' in window) {
         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(section);
     });
+}
 
-    // ========================
-// 6. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
+// ========================
+// 6. ТАЙМЕР ОБРАТНОГО ОТСЧЁТА (исправлен)
 // ========================
 function startCountdown(targetDate) {
     const daysEl = document.getElementById('days');
     const hoursEl = document.getElementById('hours');
     const minutesEl = document.getElementById('minutes');
     const secondsEl = document.getElementById('seconds');
+    const countdownDiv = document.getElementById('countdown');
 
     function update() {
         const now = new Date().getTime();
@@ -121,9 +125,7 @@ function startCountdown(targetDate) {
 
         if (distance < 0) {
             // Время истекло
-            document.getElementById('countdown').innerHTML = '🎉 Обновление уже вышло!';
-            // Опционально: перезагрузить страницу, чтобы показать новую версию
-            // setTimeout(() => location.reload(), 3000);
+            countdownDiv.innerHTML = '🎉 Обновление уже вышло!';
             return;
         }
 
@@ -142,8 +144,37 @@ function startCountdown(targetDate) {
     setInterval(update, 1000);
 }
 
-// Укажите ДАТУ и ВРЕМЯ следующего обновления (в UTC, если не хотите проблем с часовыми поясами)
-// Формат: год, месяц (0-11), день, часы, минуты, секунды
-const nextUpdate = new Date(2026, 6, 20, 18, 0, 0); // 20 июля 2026 18:00 (по вашему времени)
+// Устанавливаем дату следующего обновления на 7 дней вперед от текущего момента
+// (чтобы таймер всегда показывал что-то)
+const now = new Date();
+const nextUpdate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // +7 дней
+// Если хотите задать конкретную дату, раскомментируйте строку ниже и закомментируйте предыдущую:
+// const nextUpdate = new Date(2026, 6, 25, 18, 0, 0); // 25 июля 2026 18:00
+
 startCountdown(nextUpdate.getTime());
-}
+
+// ========================
+// 7. КНОПКА "НАЖМИ МЕНЯ!" (добавляется динамически)
+// ========================
+document.addEventListener('DOMContentLoaded', function() {
+    const heading = document.querySelector('h1');
+    if (heading && !document.getElementById('magic-button')) {
+        const button = document.createElement('button');
+        button.id = 'magic-button';
+        button.className = 'btn btn-magic';
+        button.textContent = '✨ Нажми меня!';
+        
+        button.addEventListener('click', function() {
+            const messages = [
+                '🎉 Отлично! Вы нажали на кнопку!',
+                '⭐ GitHub Pages — это круто!',
+                '🚀 Ваш сайт работает с JavaScript!',
+                '💡 Попробуйте обновить страницу!'
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
+        });
+        
+        heading.parentNode.insertBefore(button, heading.nextSibling);
+    }
+});
