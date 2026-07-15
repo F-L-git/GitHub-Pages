@@ -404,6 +404,15 @@ function startCountdown(targetDate) {
         if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
         if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
         if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+
+        // Обновляем единицы измерения в соответствии с языком
+        const t = translations[currentLang];
+        document.querySelector('.countdown-container #days')?.parentNode?.childNodes?.forEach(node => {
+            if (node.nodeType === 3 && node.textContent.trim() === 'д') node.textContent = ' ' + t.days + ' ';
+            if (node.nodeType === 3 && node.textContent.trim() === 'ч') node.textContent = ' ' + t.hours + ' ';
+            if (node.nodeType === 3 && node.textContent.trim() === 'м') node.textContent = ' ' + t.minutes + ' ';
+            if (node.nodeType === 3 && node.textContent.trim() === 'с') node.textContent = ' ' + t.seconds + ' ';
+        });
     }
 
     update();
