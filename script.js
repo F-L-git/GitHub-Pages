@@ -173,16 +173,24 @@ function startCountdown(targetDate) {
     const minutesEl = document.getElementById('minutes');
     const secondsEl = document.getElementById('seconds');
     const countdownDiv = document.getElementById('countdown');
+    const progressBar = document.getElementById('progress-bar');
+    const initialDuration = targetDate - new Date().getTime(); // запоминаем при старте
 
     function update() {
         const now = new Date().getTime();
         const distance = targetDate - now;
+        const progress = Math.max(0, (distance / initialDuration) * 100);
+
+        if (progressBar) {
+            progressBar.style.width = Math.min(100, progress) + '%';
+        }
 
         if (distance < 0) {
             countdownDiv.innerHTML = '🎉 Обновление уже вышло!';
+            if (progressBar) progressBar.style.width = '100%';
             return;
         }
-
+        
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
