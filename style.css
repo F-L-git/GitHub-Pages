@@ -82,10 +82,10 @@ header h1 {
 
 /* Кнопка "Нажми меня!" – прямоугольная с мягкими краями */
 .btn-magic {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
-    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
-    border-radius: 10px;          /* ← мягкие края, но прямоугольная */
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    border-radius: 10px;
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
     width: auto;
@@ -95,7 +95,12 @@ header h1 {
 }
 .btn-magic:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 25px rgba(245, 87, 108, 0.6);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+}
+
+body.dark-theme .btn-magic {
+    background: linear-gradient(135deg, #4a4a6a 0%, #2d2d44 100%);
+    color: #f0f0f0;
 }
 
 /* ===== ТАЙМЕР ===== */
