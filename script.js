@@ -1,4 +1,223 @@
 // ========================
+// ПЕРЕВОДЫ (i18n)
+// ========================
+const translations = {
+    ru: {
+        greeting: ['Доброй ночи!', 'Доброе утро!', 'Добрый день!', 'Добрый вечер!'],
+        timePrefix: '🕐',
+        weather: 'Погода',
+        temp: '°C',
+        countdownTitle: '⏳ До следующего обновления сайта осталось:',
+        days: 'д',
+        hours: 'ч',
+        minutes: 'м',
+        seconds: 'с',
+        updateOut: '🎉 Обновление уже вышло!',
+        magicButton: '✨ Нажми меня!',
+        // Заголовки секций
+        aboutTitle: '🛠️ О проекте',
+        aboutText1: 'Сайт создан для изучения возможностей бесплатного хостинга от <strong>GitHub</strong>.',
+        aboutText2: 'Теперь сайт поддерживает <strong>интерактивность</strong> благодаря JavaScript 🌟',
+        techTitle: '🧠 Технологии',
+        techList: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'GitHub Pages'],
+        jsTitle: '🧩 JavaScript-версия',
+        jsText: 'В этой версии сайта добавлены скрипты, которые делают страницу живой:',
+        jsList: ['📅 Приветственное сообщение в зависимости от времени суток', '🎨 Кнопка для смены темы (светлая/тёмная)', '🔢 Таймер обратного отсчёта до следующего обновления'],
+        codeLabel: '📄 Пример кода (файл <code>script.js</code>):',
+        setupTitle: '🚀 Настройка GitHub Pages',
+        setupSteps: [
+            'Перейдите в свой репозиторий на <strong>GitHub</strong>.',
+            'Нажмите <strong>Settings</strong> (вкладка в верхнем меню).',
+            'В левом меню выберите <strong>Pages</strong>.',
+            'В разделе <strong>Branch</strong> выберите ветку (обычно <code>main</code> или <code>master</code>). Оставьте папку <code>/(root)</code>.',
+            'Нажмите <strong>Save</strong>.',
+            'Через пару минут сайт станет доступен по ссылке.'
+        ],
+        setupImportant: '<strong>Важно:</strong> Если репозиторий не <code>username.github.io</code>, сайт будет по адресу <code>username.github.io/имя-репозитория</code>.',
+        tipsTitle: '🧑‍💻 Дополнительные советы',
+        tipsList: [
+            'Используйте <a href="https://getbootstrap.com" target="_blank">Bootstrap</a> или <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a>.',
+            'Добавьте иконки с <a href="https://fontawesome.com" target="_blank">Font Awesome</a>.',
+            'Сделайте адаптивный дизайн.'
+        ],
+        troubleTitle: '❓ Что делать, если сайт не открывается?',
+        troubleList: [
+            'Проверьте ветку в настройках <strong>Pages</strong>.',
+            'Посмотрите вкладку <strong>Actions</strong> — там могут быть ошибки.'
+        ],
+        jekyllTitle: '🎨 Альтернатива: Jekyll',
+        jekyllText: 'Выберите тему в настройках <strong>Pages</strong> (кнопка <strong>Choose a theme</strong>). GitHub сгенерирует сайт на основе <code>README.md</code>.',
+        footerCopyright: '© 2026, fl-git',
+        footerVisits: '👀 Просмотров:',
+        footerRepo: '📂 Репозиторий',
+        // Для карты
+        mapPopup: '📍 Москва',
+        // Для игры (если добавите)
+        guessTitle: '🎯 Угадай число',
+        guessText: 'Я загадал число от 1 до 100. Попробуй угадать!',
+        guessPlaceholder: 'Введите число',
+        guessBtn: 'Проверить',
+        guessResult: '',
+    },
+    en: {
+        greeting: ['Good night!', 'Good morning!', 'Good afternoon!', 'Good evening!'],
+        timePrefix: '🕐',
+        weather: 'Weather',
+        temp: '°C',
+        countdownTitle: '⏳ Time until next site update:',
+        days: 'd',
+        hours: 'h',
+        minutes: 'm',
+        seconds: 's',
+        updateOut: '🎉 Update is out!',
+        magicButton: '✨ Click me!',
+        aboutTitle: '🛠️ About Project',
+        aboutText1: 'This site was created to learn about free hosting from <strong>GitHub</strong>.',
+        aboutText2: 'Now the site supports <strong>interactivity</strong> thanks to JavaScript 🌟',
+        techTitle: '🧠 Technologies',
+        techList: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'GitHub Pages'],
+        jsTitle: '🧩 JavaScript Version',
+        jsText: 'This version of the site includes scripts that make the page lively:',
+        jsList: ['📅 Greeting message depending on time of day', '🎨 Theme toggle button (light/dark)', '🔢 Countdown timer to next update'],
+        codeLabel: '📄 Code example (file <code>script.js</code>):',
+        setupTitle: '🚀 GitHub Pages Setup',
+        setupSteps: [
+            'Go to your repository on <strong>GitHub</strong>.',
+            'Click <strong>Settings</strong> (tab at the top).',
+            'In the left menu, select <strong>Pages</strong>.',
+            'In the <strong>Branch</strong> section, select the branch (usually <code>main</code> or <code>master</code>). Leave folder <code>/(root)</code>.',
+            'Click <strong>Save</strong>.',
+            'In a few minutes the site will be available at the link.'
+        ],
+        setupImportant: '<strong>Important:</strong> If the repository is not <code>username.github.io</code>, the site will be at <code>username.github.io/repo-name</code>.',
+        tipsTitle: '🧑‍💻 Additional Tips',
+        tipsList: [
+            'Use <a href="https://getbootstrap.com" target="_blank">Bootstrap</a> or <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a>.',
+            'Add icons with <a href="https://fontawesome.com" target="_blank">Font Awesome</a>.',
+            'Make responsive design.'
+        ],
+        troubleTitle: '❓ What if site doesn\'t open?',
+        troubleList: [
+            'Check the branch in <strong>Pages</strong> settings.',
+            'Look at the <strong>Actions</strong> tab — there may be build errors.'
+        ],
+        jekyllTitle: '🎨 Alternative: Jekyll',
+        jekyllText: 'Choose a theme in <strong>Pages</strong> settings (button <strong>Choose a theme</strong>). GitHub will generate a site based on <code>README.md</code>.',
+        footerCopyright: '© 2026, fl-git',
+        footerVisits: '👀 Visits:',
+        footerRepo: '📂 Repository',
+        mapPopup: '📍 Moscow',
+        guessTitle: '🎯 Guess the Number',
+        guessText: 'I\'ve chosen a number from 1 to 100. Try to guess!',
+        guessPlaceholder: 'Enter number',
+        guessBtn: 'Check',
+        guessResult: '',
+    }
+};
+
+let currentLang = localStorage.getItem('lang') || 'ru';
+
+function setLanguage(lang) {
+    if (!translations[lang]) return;
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    updateUI(lang);
+    // Обновить кнопку языка
+    const langBtn = document.getElementById('lang-toggle');
+    if (langBtn) {
+        langBtn.textContent = lang === 'ru' ? '🇬🇧' : '🇷🇺';
+        langBtn.title = lang === 'ru' ? 'Switch to English' : 'Переключить на русский';
+    }
+    // Показать уведомление
+    showToast(lang === 'ru' ? '🌍 Язык переключён на русский' : '🌍 Language switched to English');
+}
+
+function updateUI(lang) {
+    const t = translations[lang];
+    if (!t) return;
+
+    // 1. Приветствие – обновляем динамически, потому что зависит от времени
+    // Но мы можем обновить только текст приветствия при следующем вызове updateGreeting()
+    // Для этого сохраним язык и используем его внутри updateGreeting
+    // Мы переделаем updateGreeting чуть позже
+
+    // 2. Заголовки и тексты секций
+    document.querySelector('#about h2').innerHTML = t.aboutTitle;
+    document.querySelector('#about p:first-of-type').innerHTML = t.aboutText1;
+    document.querySelector('#about p:last-of-type').innerHTML = t.aboutText2;
+
+    document.querySelector('#tech h2').innerHTML = t.techTitle;
+    const techUl = document.querySelector('#tech ul');
+    techUl.innerHTML = t.techList.map(item => `<li><code>${item}</code></li>`).join('');
+
+    document.querySelector('#js-version h2').innerHTML = t.jsTitle;
+    const jsP = document.querySelector('#js-version p:first-of-type');
+    if (jsP) jsP.innerHTML = t.jsText;
+    const jsUl = document.querySelector('#js-version ul');
+    if (jsUl) jsUl.innerHTML = t.jsList.map(item => `<li>${item}</li>`).join('');
+    const codeLabel = document.querySelector('#js-version p:last-of-type');
+    if (codeLabel) codeLabel.innerHTML = t.codeLabel;
+
+    document.querySelector('#setup h2').innerHTML = t.setupTitle;
+    const setupOl = document.querySelector('#setup ol');
+    setupOl.innerHTML = t.setupSteps.map(step => `<li>${step}</li>`).join('');
+    const setupImportant = document.querySelector('#setup p:last-of-type');
+    if (setupImportant) setupImportant.innerHTML = t.setupImportant;
+
+    document.querySelector('#tips h2').innerHTML = t.tipsTitle;
+    const tipsUl = document.querySelector('#tips ul');
+    tipsUl.innerHTML = t.tipsList.map(item => `<li>${item}</li>`).join('');
+
+    document.querySelector('#trouble h2').innerHTML = t.troubleTitle;
+    const troubleUl = document.querySelector('#trouble ul');
+    troubleUl.innerHTML = t.troubleList.map(item => `<li>${item}</li>`).join('');
+
+    document.querySelector('#jekyll h2').innerHTML = t.jekyllTitle;
+    const jekyllP = document.querySelector('#jekyll p');
+    if (jekyllP) jekyllP.innerHTML = t.jekyllText;
+
+    // 3. Футер
+    const footer = document.querySelector('footer');
+    const footerP = footer.querySelectorAll('p');
+    if (footerP.length >= 2) {
+        footerP[0].innerHTML = t.footerCopyright;
+        footerP[1].innerHTML = `${t.footerVisits} <span id="count">0</span>`;
+        // Ссылка на репозиторий – добавим, если есть
+        const repoLink = footer.querySelector('a');
+        if (repoLink) repoLink.innerHTML = t.footerRepo;
+    }
+
+    // 4. Таймер (заголовок и единицы)
+    const countdownTitle = document.querySelector('.countdown-container p');
+    if (countdownTitle) countdownTitle.textContent = t.countdownTitle;
+    // Единицы измерения обновляются внутри таймера, но мы можем их переопределить
+    // При следующем обновлении таймера они будут браться из текущего языка
+    // Для этого модифицируем startCountdown
+
+    // 5. Кнопка "Нажми меня!"
+    const magicBtn = document.getElementById('magic-button');
+    if (magicBtn) magicBtn.textContent = t.magicButton;
+
+    // 6. Погода – обновляем описание через функцию fetchWeather, которая уже использует язык?
+    // Пока просто перезапросим погоду с новым языком
+    fetchWeather(); // она перезапишет описание
+
+    // 7. Карта – обновим popup
+    updateMapPopup(lang);
+
+    // 8. Обновляем приветствие (вызовем updateGreeting, который теперь будет использовать язык)
+    updateGreeting();
+}
+
+// Функция обновления popup карты (будет реализована позже)
+let mapMarker = null;
+function updateMapPopup(lang) {
+    if (mapMarker) {
+        mapMarker.setPopupContent(translations[lang].mapPopup);
+    }
+}
+
+// ========================
 // 1. ПРИВЕТСТВИЕ ПО ВРЕМЕНИ
 // ========================
 function updateGreeting() {
