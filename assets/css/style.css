@@ -1164,24 +1164,26 @@ body.dark-theme .section h2:hover {
 
 /* ===== ИКОНКА GITHUB В ФУТЕРЕ ===== */
 #footer-repo-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    color: #2d3748;          /* цвет иконки (как у текста) */
-    text-decoration: none;   /* убираем подчёркивание */
-    transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #2d3748; /* цвет иконки (как у текста) */
+  text-decoration: none; /* убираем подчёркивание */
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
 }
 
 #footer-repo-link:hover {
-    color: #667eea;
-    transform: scale(1.1) rotate(4deg);
-    text-decoration: none;   /* чтобы и при наведении не было подчёркивания */
+  color: #667eea;
+  transform: scale(1.1) rotate(4deg);
+  text-decoration: none; /* чтобы и при наведении не было подчёркивания */
 }
 
 body.dark-theme #footer-repo-link {
-    color: #b0b0c8;
+  color: #b0b0c8;
 }
 body.dark-theme #footer-repo-link:hover {
-    color: #89b4fa;
+  color: #89b4fa;
 }
