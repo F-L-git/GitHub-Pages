@@ -726,11 +726,11 @@ document.addEventListener('visibilitychange', () => {
 // 11. ОБРАБОТЧИКИ ПОСЛЕ ЗАГРУЗКИ DOM
 // ========================
 document.addEventListener('DOMContentLoaded', function () {
-    
+
     // Кнопка "Нажми меня!"
     const magicBtn = document.getElementById('magic-button');
     if (magicBtn) {
-        magicBtn.addEventListener('click', function() {
+        magicBtn.addEventListener('click', function () {
             const messages = translations[currentLang].toastMessages;
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
             showToast(randomMessage);
@@ -944,14 +944,14 @@ window.addEventListener('scroll', () => {
 });
 
 document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
+    btn.addEventListener('click', function (e) {
         const rect = this.getBoundingClientRect();
         const ripple = document.createElement('span');
         ripple.classList.add('ripple');
         const size = Math.max(rect.width, rect.height);
         ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = e.clientX - rect.left - size/2 + 'px';
-        ripple.style.top = e.clientY - rect.top - size/2 + 'px';
+        ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+        ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
         this.appendChild(ripple);
         setTimeout(() => ripple.remove(), 800);
     });

@@ -1,20 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Мой сайт на GitHub Pages</title>
-    <link rel="stylesheet" href="style.css?v=3">
-    <link rel="manifest" href="../.yml/manifest.json">
+    <link rel="stylesheet" href="style.css?v=3" />
+    <link rel="manifest" href="../.yml/manifest.json" />
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../favicon-io/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="../favicon-io/apple-touch-icon.png">
-    <link rel="android-chrome-192x192" sizes="192x192" href="../favicon-io/android-chrome-192x192.png">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
-</head>
-<body>
-    
+    <link rel="icon" type="image/x-icon" href="../favicon-io/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../favicon-io/apple-touch-icon.png"
+    />
+    <link
+      rel="android-chrome-192x192"
+      sizes="192x192"
+      href="../favicon-io/android-chrome-192x192.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <!-- Кастомный курсор -->
     <div id="cursor-dot"></div>
     <div id="cursor-trail"></div>
@@ -27,72 +40,98 @@
 
     <!-- Основной контент -->
     <div class="container">
-        <header>
-            <div class="header-top">
-                <div class="header-left">
-                    <h1 id="greeting">Доброй ночи! 👋</h1>
-                    <p id="time-display">🕐 04:33:07</p>
-                </div>
-                <div class="header-right">
-                    <div class="weather-widget" id="weather-widget">
-                        <span id="weather-icon">⛅</span>
-                        <span id="weather-temp">18</span>°C
-                        <span id="weather-desc">Переменная облачность</span>
-                    </div>
-                    <button id="lang-toggle" class="btn" title="Переключить язык" aria-label="Переключить язык">🇬🇧</button>
-                    <button id="theme-toggle" class="btn" title="Переключить тему"></button>
-                </div>
+      <header>
+        <div class="header-top">
+          <div class="header-left">
+            <h1 id="greeting">Доброй ночи! 👋</h1>
+            <p id="time-display">🕐 04:33:07</p>
+          </div>
+          <div class="header-right">
+            <div class="weather-widget" id="weather-widget">
+              <span id="weather-icon">⛅</span>
+              <span id="weather-temp">18</span>°C
+              <span id="weather-desc">Переменная облачность</span>
             </div>
-            <div class="header-bottom">
-                <button id="magic-button" class="btn btn-magic">✨ Нажми меня!</button>
-                <div class="countdown-container">
-                    <p>⏳ До следующего обновления сайта осталось:</p>
-                    <div id="countdown">
-                        <span id="days">06</span>д
-                        <span id="hours">23</span>ч
-                        <span id="minutes">59</span>м
-                        <span id="seconds">20</span>с
-                    </div>
-                    <!-- Прогресс-бар для таймера -->
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progress-bar" style="width: 100%;"></div>
-                    </div>
-                </div>
+            <button
+              id="lang-toggle"
+              class="btn"
+              title="Переключить язык"
+              aria-label="Переключить язык"
+            >
+              🇬🇧
+            </button>
+            <button
+              id="theme-toggle"
+              class="btn"
+              title="Переключить тему"
+            ></button>
+          </div>
+        </div>
+        <div class="header-bottom">
+          <button id="magic-button" class="btn btn-magic">
+            ✨ Нажми меня!
+          </button>
+          <div class="countdown-container">
+            <p>⏳ До следующего обновления сайта осталось:</p>
+            <div id="countdown">
+              <span id="days">06</span>д <span id="hours">23</span>ч
+              <span id="minutes">59</span>м <span id="seconds">20</span>с
             </div>
-        </header>
+            <!-- Прогресс-бар для таймера -->
+            <div class="progress-container">
+              <div
+                class="progress-bar"
+                id="progress-bar"
+                style="width: 100%"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </header>
 
-        <section class="content">
-            <div class="section" id="about">
-                <h2>🛠️ О проекте</h2>
-                <p>Сайт создан для изучения возможностей бесплатного хостинга от <strong>GitHub</strong>.</p>
-                <p>Теперь сайт поддерживает <strong>интерактивность</strong> благодаря JavaScript 🌟</p>
-            </div>
-            <!-- Карта -->
-            <div class="section" id="map-section">
-                <h2 id="map-title">📍 Наше местоположение</h2>
-                <div id="map" style="height: 300px; border-radius: 12px;"></div>
-            </div>
+      <section class="content">
+        <div class="section" id="about">
+          <h2>🛠️ О проекте</h2>
+          <p>
+            Сайт создан для изучения возможностей бесплатного хостинга от
+            <strong>GitHub</strong>.
+          </p>
+          <p>
+            Теперь сайт поддерживает <strong>интерактивность</strong> благодаря
+            JavaScript 🌟
+          </p>
+        </div>
+        <!-- Карта -->
+        <div class="section" id="map-section">
+          <h2 id="map-title">📍 Наше местоположение</h2>
+          <div id="map" style="height: 300px; border-radius: 12px"></div>
+        </div>
 
-            <div class="section" id="tech">
-                <h2>🧠 Технологии</h2>
-                <ul>
-                    <li><code>HTML5</code></li>
-                    <li><code>CSS3</code></li>
-                    <li><code>JavaScript (ES6+)</code></li>
-                    <li><strong>GitHub Pages</strong></li>
-                </ul>
-            </div>
+        <div class="section" id="tech">
+          <h2>🧠 Технологии</h2>
+          <ul>
+            <li><code>HTML5</code></li>
+            <li><code>CSS3</code></li>
+            <li><code>JavaScript (ES6+)</code></li>
+            <li><strong>GitHub Pages</strong></li>
+          </ul>
+        </div>
 
-            <div class="section" id="js-version">
-                <h2>🧩 JavaScript-версия</h2>
-                <p>В этой версии сайта добавлены скрипты, которые делают страницу живой:</p>
-                <ul>
-                    <li>📅 Приветственное сообщение в зависимости от времени суток</li>
-                    <li>🎨 Кнопка для смены темы (светлая/тёмная)</li>
-                    <li>🔢 Таймер обратного отсчёта до следующего обновления</li>
-                </ul>
-                <p><strong>📄 Пример кода (файл <code>script.js</code>):</strong></p>
-                <pre><code>// Приветствие
+        <div class="section" id="js-version">
+          <h2>🧩 JavaScript-версия</h2>
+          <p>
+            В этой версии сайта добавлены скрипты, которые делают страницу
+            живой:
+          </p>
+          <ul>
+            <li>📅 Приветственное сообщение в зависимости от времени суток</li>
+            <li>🎨 Кнопка для смены темы (светлая/тёмная)</li>
+            <li>🔢 Таймер обратного отсчёта до следующего обновления</li>
+          </ul>
+          <p>
+            <strong>📄 Пример кода (файл <code>script.js</code>):</strong>
+          </p>
+          <pre><code>// Приветствие
 window.addEventListener('DOMContentLoaded', () => {
   console.log('Добро пожаловать на мой сайт!');
   const title = document.querySelector('h1');
@@ -104,53 +143,88 @@ const themeBtn = document.getElementById('theme-toggle');
 themeBtn?.addEventListener('click', () => {
   document.body.classList.toggle('dark');
 });</code></pre>
-            </div>
+        </div>
 
-            <div class="section" id="setup">
-                <h2>🚀 Настройка GitHub Pages</h2>
-                <ol>
-                    <li>Перейдите в свой репозиторий на <strong>GitHub</strong>.</li>
-                    <li>Нажмите <strong>Settings</strong> (вкладка в верхнем меню).</li>
-                    <li>В левом меню выберите <strong>Pages</strong>.</li>
-                    <li>В разделе <strong>Branch</strong> выберите ветку (обычно <code>main</code> или <code>master</code>). Оставьте папку <code>/(root)</code>.</li>
-                    <li>Нажмите <strong>Save</strong>.</li>
-                    <li>Через пару минут сайт станет доступен по ссылке.</li>
-                </ol>
-                <p><strong>Важно:</strong> Если репозиторий не <code>username.github.io</code>, сайт будет по адресу <code>username.github.io/имя-репозитория</code>.</p>
-            </div>
+        <div class="section" id="setup">
+          <h2>🚀 Настройка GitHub Pages</h2>
+          <ol>
+            <li>Перейдите в свой репозиторий на <strong>GitHub</strong>.</li>
+            <li>Нажмите <strong>Settings</strong> (вкладка в верхнем меню).</li>
+            <li>В левом меню выберите <strong>Pages</strong>.</li>
+            <li>
+              В разделе <strong>Branch</strong> выберите ветку (обычно
+              <code>main</code> или <code>master</code>). Оставьте папку
+              <code>/(root)</code>.
+            </li>
+            <li>Нажмите <strong>Save</strong>.</li>
+            <li>Через пару минут сайт станет доступен по ссылке.</li>
+          </ol>
+          <p>
+            <strong>Важно:</strong> Если репозиторий не
+            <code>username.github.io</code>, сайт будет по адресу
+            <code>username.github.io/имя-репозитория</code>.
+          </p>
+        </div>
 
-            <div class="section" id="tips">
-                <h2>🧑‍💻 Дополнительные советы</h2>
-                <ul>
-                    <li>Используйте <a href="https://getbootstrap.com" target="_blank">Bootstrap</a> или <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a>.</li>
-                    <li>Добавьте иконки с <a href="https://fontawesome.com" target="_blank">Font Awesome</a>.</li>
-                    <li>Сделайте адаптивный дизайн.</li>
-                </ul>
-            </div>
+        <div class="section" id="tips">
+          <h2>🧑‍💻 Дополнительные советы</h2>
+          <ul>
+            <li>
+              Используйте
+              <a href="https://getbootstrap.com" target="_blank">Bootstrap</a>
+              или
+              <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a
+              >.
+            </li>
+            <li>
+              Добавьте иконки с
+              <a href="https://fontawesome.com" target="_blank">Font Awesome</a
+              >.
+            </li>
+            <li>Сделайте адаптивный дизайн.</li>
+          </ul>
+        </div>
 
-            <div class="section" id="trouble">
-                <h2>❓ Что делать, если сайт не открывается?</h2>
-                <ul>
-                    <li>Проверьте ветку в настройках <strong>Pages</strong>.</li>
-                    <li>Посмотрите вкладку <strong>Actions</strong> — там могут быть ошибки.</li>
-                </ul>
-            </div>
+        <div class="section" id="trouble">
+          <h2>❓ Что делать, если сайт не открывается?</h2>
+          <ul>
+            <li>Проверьте ветку в настройках <strong>Pages</strong>.</li>
+            <li>
+              Посмотрите вкладку <strong>Actions</strong> — там могут быть
+              ошибки.
+            </li>
+          </ul>
+        </div>
 
-            <div class="section" id="jekyll">
-                <h2>🎨 Альтернатива: Jekyll</h2>
-                <p>Выберите тему в настройках <strong>Pages</strong> (кнопка <strong>Choose a theme</strong>). GitHub сгенерирует сайт на основе <code>README.md</code>.</p>
-            </div>
-        </section>
+        <div class="section" id="jekyll">
+          <h2>🎨 Альтернатива: Jekyll</h2>
+          <p>
+            Выберите тему в настройках <strong>Pages</strong> (кнопка
+            <strong>Choose a theme</strong>). GitHub сгенерирует сайт на основе
+            <code>README.md</code>.
+          </p>
+        </div>
+      </section>
 
-        <footer>
-            <p id="footer-copyright">© 2026, fl-git</p>
-            <p><span id="footer-visits-text">👀 Просмотров:</span> <span id="count">0</span></p>
-            <p><a href="https://github.com/F-L-git/GitHub-Pages" target="_blank" id="footer-repo-link">📂 Репозиторий</a></p>
-        </footer>
+      <footer>
+        <p id="footer-copyright">© 2026, fl-git</p>
+        <p>
+          <span id="footer-visits-text">👀 Просмотров:</span>
+          <span id="count">0</span>
+        </p>
+        <p>
+          <a
+            href="https://github.com/F-L-git/GitHub-Pages"
+            target="_blank"
+            id="footer-repo-link"
+            >📂 Репозиторий</a
+          >
+        </p>
+      </footer>
     </div>
 
     <script src="script.js?v=3"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-</body>
-<div id="reading-progress"></div>
+  </body>
+  <div id="reading-progress"></div>
 </html>
