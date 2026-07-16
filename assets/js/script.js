@@ -298,7 +298,7 @@ function locateUser() {
             }
             showToast(message);
             // В случае ошибки показываем город по умолчанию (Москва)
-            showLocationOnMap(55.7558, 37.6173, '📍 Москва (по умолчанию)');
+            // showLocationOnMap(55.7558, 37.6173, '📍 Москва (по умолчанию)');
         },
         {
             enableHighAccuracy: true,  // использовать GPS если доступен
