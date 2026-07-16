@@ -664,41 +664,6 @@ body.dark-theme {
   }
 }
 
-body {
-  --gradient-x: 50%;
-  --gradient-y: 50%;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  background-position: var(--gradient-x) var(--gradient-y);
-  animation: gradientBG 15s ease infinite;
-  min-height: 100vh;
-  transition: background-position 0.1s ease-out;
-}
-
-@keyframes gradientBG {
-  0% {
-    background-position: var(--gradient-x) var(--gradient-y);
-  }
-
-  50% {
-    background-position: calc(var(--gradient-x) + 10%)
-      calc(var(--gradient-y) + 10%);
-  }
-
-  100% {
-    background-position: var(--gradient-x) var(--gradient-y);
-  }
-}
-
-body.dark-theme {
-  --gradient-x: 50%;
-  --gradient-y: 50%;
-  background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e);
-  background-size: 400% 400%;
-  background-position: var(--gradient-x) var(--gradient-y);
-  animation: gradientBG 15s ease infinite;
-}
-
 :root {
   /* Цветовая палитра (брендовые цвета) */
   --color-primary: #667eea;
@@ -801,11 +766,9 @@ header {
   0% {
     background-position: 0% 50%;
   }
-
   50% {
     background-position: 100% 50%;
   }
-
   100% {
     background-position: 0% 50%;
   }
