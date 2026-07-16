@@ -25,6 +25,17 @@
       href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- Prism.js - подсветка синтаксиса -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
   </head>
   <body>
     <!-- Кастомный курсор -->
@@ -42,7 +53,7 @@
       <header>
         <div class="header-top">
           <div class="header-left">
-            <h1 id="greeting">Доброй ночи! 👋</h1>
+            <h1 id="greeting">Доброй ночи!</h1>
             <p id="time-display">🕐 04:33:07</p>
           </div>
           <div class="header-right">
@@ -52,13 +63,21 @@
               <span id="weather-desc">Переменная облачность</span>
             </div>
             <div class="fixed-buttons">
-              <button id="lang-toggle" class="btn" title="Переключить язык">🇬🇧</button>
-              <button id="theme-toggle" class="btn" title="Переключить тему"></button>
+              <button
+                id="lang-toggle"
+                title="Переключить язык"
+                aria-label="Переключить язык"
+              >
+                <i class="fas fa-globe-americas"></i>
+              </button>
+              <button id="theme-toggle" title="Переключить тему">
+                <i class="fas fa-sun"></i>
+                <!-- или fa-sun для светлой темы -->
+              </button>
             </div>
           </div>
-          </div>
-          
-        
+        </div>
+
         <div class="header-bottom">
           <button id="magic-button" class="btn btn-magic">
             ✨ Нажми меня!
@@ -123,17 +142,17 @@
           <p>
             <strong>📄 Пример кода (файл <code>script.js</code>):</strong>
           </p>
-          <pre><code>// Приветствие
+          <pre><code class="language-javascript">// Приветствие
 window.addEventListener('DOMContentLoaded', () => {
-  console.log('Добро пожаловать на мой сайт!');
-  const title = document.querySelector('h1');
-  title.style.transition = 'color 0.5s';
+    console.log('Добро пожаловать на мой сайт!');
+    const title = document.querySelector('h1');
+    title.style.transition = 'color 0.5s';
 });
 
 // Переключение темы
 const themeBtn = document.getElementById('theme-toggle');
 themeBtn?.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
+    document.body.classList.toggle('dark');
 });</code></pre>
         </div>
 

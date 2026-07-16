@@ -188,6 +188,7 @@ function setLanguage(lang) {
         langBtn.textContent = lang === 'ru' ? '🇬🇧' : '🇷🇺';
         langBtn.title = lang === 'ru' ? 'Switch to English' : 'Переключить на русский';
     }
+    langBtn.innerHTML = lang === 'ru' ? '<i class="fas fa-globe-americas"></i>' : '<i class="fas fa-globe-europe"></i>';
     // Показать уведомление
     showToast(lang === 'ru' ? '🌍 Язык переключён на русский' : '🌍 Language switched to English');
 }
@@ -332,9 +333,7 @@ function updateUI(lang) {
     if (!t) return;
 
     // 1. Приветствие – обновляем динамически, потому что зависит от времени
-    // Но мы можем обновить только текст приветствия при следующем вызове updateGreeting()
-    // Для этого сохраним язык и используем его внутри updateGreeting
-    // Мы переделаем updateGreeting чуть позже
+
 
     // 2. Заголовки и тексты секций
     document.querySelector('#about h2').innerHTML = t.aboutTitle;
@@ -412,6 +411,7 @@ function updateUI(lang) {
 // 1. ПРИВЕТСТВИЕ ПО ВРЕМЕНИ
 // ========================
 function updateGreeting() {
+
     const now = new Date();
     const hour = now.getHours();
     let greetingIndex;
@@ -425,7 +425,7 @@ function updateGreeting() {
 
     const greetingEl = document.getElementById('greeting');
     if (greetingEl) {
-        greetingEl.textContent = greetingText + ' 👋';
+        greetingEl.textContent = greetingText;
     }
 
     const timeEl = document.getElementById('time-display');
@@ -434,9 +434,6 @@ function updateGreeting() {
         timeEl.textContent = t.timePrefix + ' ' + now.toLocaleTimeString('ru-RU', options);
     }
 }
-
-updateGreeting();
-setInterval(updateGreeting, 1000);
 
 // ========================
 // 2. КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ
@@ -448,21 +445,27 @@ function updateThemeButton() {
     const isDark = document.body.classList.contains('dark-theme');
     themeToggle.textContent = isDark ? '☀️' : '🌙';
     themeToggle.title = isDark ? 'Включить светлую тему' : 'Включить тёмную тему';
+    themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
 }
 
 function setAutoTheme() {
-    const hour = new Date().getHours();
-    const isDay = hour >= 6 && hour < 18;
-    if (isDay) {
-        document.body.classList.remove('dark-theme');
-    } else {
+    const now = new Date();
+    const hour = now.getHours();
+
+    // Тёмная тема с 22:00 до 06:00 (включительно)
+    const isDarkTime = hour >= 22 || hour < 6;
+
+    if (isDarkTime) {
         document.body.classList.add('dark-theme');
+    } else {
+        document.body.classList.remove('dark-theme');
     }
     updateThemeButton();
 }
 
 setAutoTheme();
 
+// Ручное переключение по клику
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-theme');
@@ -902,7 +905,6 @@ function showLocationOnMap(lat, lon, popupText) {
     document.body.style.cursor = 'none';
 })();
 
-// В script.js
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.textContent = '';
@@ -915,6 +917,7 @@ function typeWriter(element, text, speed = 100) {
     }
     type();
 }
+
 // Использование после загрузки DOM
 document.addEventListener('DOMContentLoaded', () => {
     const h1 = document.getElementById('greeting');

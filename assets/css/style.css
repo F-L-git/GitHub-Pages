@@ -90,6 +90,7 @@ header {
   align-items: baseline;
   gap: 1rem;
 }
+
 .header-left h1 {
   font-size: 2.2rem;
   margin: 0;
@@ -99,6 +100,21 @@ header {
 body.dark-theme .header-left h1 {
   color: #f0f0ff;
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem; /* расстояние между элементами */
+  margin-left: auto; /* прижимает к правому краю */
+}
+.header-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
 .header-left #time-display {
   font-size: 1.3rem;
   color: #4a5568;
@@ -106,20 +122,6 @@ body.dark-theme .header-left h1 {
 }
 body.dark-theme #time-display {
   color: #b0b0c8;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.header-bottom {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
 }
 
 /* ===== КНОПКИ (общие) ===== */
@@ -161,6 +163,11 @@ body.dark-theme #theme-toggle {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   color: #e0e0e0;
 }
+body.dark-theme #lang-toggle {
+  background: linear-gradient(135deg, #4a4a6a 0%, #2d2d44 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+}
 
 /* Кнопка "Нажми меня!" */
 .btn-magic {
@@ -197,6 +204,43 @@ body.dark-theme .btn-magic {
   100% {
     box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
   }
+}
+
+/* ===== КНОПКИ-ЗНАЧКИ (язык и тема) ===== */
+#lang-toggle,
+#theme-toggle {
+  background: transparent !important; /* убрать фон */
+  border: none !important; /* убрать рамку */
+  box-shadow: none !important; /* убрать тень */
+  padding: 0.2rem 0.4rem; /* минимальные отступы */
+  font-size: 1.6rem; /* размер иконок */
+  width: auto; /* автоширина */
+  height: auto; /* авто-высота */
+  border-radius: 0; /* убрать скругление */
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+  line-height: 1;
+}
+
+/* Эффект при наведении */
+#lang-toggle:hover,
+#theme-toggle:hover {
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+/* Чтобы не было конфликтов с общими стилями .btn */
+#lang-toggle.btn,
+#theme-toggle.btn {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0.2rem 0.4rem !important;
 }
 
 /* ===== ТАЙМЕР ===== */
@@ -357,8 +401,10 @@ body.dark-theme code {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  white-space: nowrap;
   transition: background 0.3s ease;
 }
+
 .weather-widget #weather-icon {
   font-size: 1.4rem;
 }
@@ -400,7 +446,9 @@ body.dark-theme footer {
     justify-content: center;
   }
   .header-right {
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
   }
   .header-bottom {
     flex-direction: column;
@@ -429,8 +477,10 @@ body.dark-theme footer {
     font-size: 1rem;
   }
   .weather-widget {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+    width: fit-content;
+    justify-content: left;
   }
 }
 
@@ -780,4 +830,23 @@ header {
   border-radius: 8px; /* небольшое скругление – квадратные с мягкими углами */
   /* Можно также задать свои размеры, если нужно */
   /* width: 3.2rem; height: 3.2rem;  уже есть, оставляем */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+/* Порядок элементов: погода → кнопка языка → кнопка темы */
+.weather-widget {
+  order: 0;
+}
+#lang-toggle {
+  order: 1;
+}
+#theme-toggle {
+  order: 2;
 }
