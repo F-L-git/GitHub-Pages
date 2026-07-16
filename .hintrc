@@ -3,9 +3,8 @@
     "development"
   ],
   "hints": {
-    "disown-opener": "off",
-    "apple-touch-icons": "off",
     "no-inline-styles": "off",
+    "disown-opener": "off",
     "compat-api/css": [
       "default",
       {
@@ -13,7 +12,6 @@
           "backdrop-filter"
         ]
       }
-    ],
-    "css-prefix-order": "off"
+    ]
   }
 }
