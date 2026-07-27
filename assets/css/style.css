@@ -1528,3 +1528,229 @@ body.dark-theme::after {
     opacity: 1;
   }
 }
+
+/* ============================================================
+   УСИЛЕННЫЙ СТЕКЛЯННЫЙ ЭФФЕКТ ДЛЯ ВКЛАДОК В ТЁМНОЙ ТЕМЕ
+   ============================================================ */
+
+/* ---------- КНОПКИ ВКЛАДОК ---------- */
+body.dark-theme .tab-btn {
+  /* Очень прозрачный фон, почти незаметный */
+  background: rgba(255, 255, 255, 0.001) !important;
+  /* Сильное размытие */
+  backdrop-filter: blur(50px) !important;
+  -webkit-backdrop-filter: blur(50px) !important;
+  /* Яркая, но полупрозрачная граница - создаёт эффект стекла */
+  border: 1px solid rgba(255, 255, 255, 0.001) !important;
+  border-bottom: none !important;
+  border-radius: 16px 16px 0 0 !important;
+  color: rgba(255, 255, 255, 0.1) !important;
+  /* Лёгкая внутренняя тень для глубины */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.01) !important;
+  transition: all 0.3s ease !important;
+}
+
+body.dark-theme .tab-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 8px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-theme .tab-btn.active {
+  /* Активная вкладка – более плотное стекло */
+  background: rgba(118, 75, 162, 0.25) !important;
+  backdrop-filter: blur(50px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border-color: rgba(118, 75, 162, 0.5) !important;
+  color: #ffffff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 -4px 30px rgba(118, 75, 162, 0.35) !important;
+}
+
+/* ---------- ПАНЕЛЬ ВКЛАДКИ (содержимое) ---------- */
+body.dark-theme .tab-panel {
+  background: rgba(10, 10, 30, 0.35) !important;
+  backdrop-filter: blur(50px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-top: none !important;
+  border-radius: 0 0 20px 20px !important;
+  box-shadow:
+    inset 0 0 60px rgba(118, 75, 162, 0.05),
+    0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Стеклянный блик на панели (эффект света) */
+body.dark-theme .tab-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  opacity: 0.5;
+}
+
+/* ---------- ВЕСЬ КОНТЕЙНЕР ВКЛАДОК ---------- */
+body.dark-theme .tabs-container {
+  /* Внешнее свечение – фиолетовое, но с усиленным стеклянным ореолом */
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(118, 75, 162, 0.15),
+    0 0 160px rgba(102, 126, 234, 0.05) !important;
+}
+
+/* Дополнительный световой ореол вокруг контейнера */
+body.dark-theme .tabs-container::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at 30% 20%,
+    rgba(118, 75, 162, 0.1) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ============================================================
+   СТЕКЛЯННЫЙ ЭФФЕКТ ТОЛЬКО ДЛЯ ТЁМНОЙ ТЕМЫ
+   ============================================================ */
+
+/* ---------- ОСНОВНОЙ КОНТЕЙНЕР ---------- */
+body.dark-theme .container {
+  /* Прозрачный фон с сильным размытием */
+  background: rgba(10, 10, 30, 0.45) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+
+  /* Стеклянная рамка */
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 28px !important;
+
+  /* Фиолетовое свечение (пульсирующее) */
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.6),
+    0 0 80px rgba(118, 75, 162, 0.3),
+    0 0 160px rgba(102, 126, 234, 0.12) !important;
+  animation: containerGlow 5s ease-in-out infinite alternate;
+
+  /* Внутренний световой блик */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+
+  transition: all 0.4s ease;
+}
+
+/* ---------- ВСЕ СЕКЦИИ (включая вкладки) ---------- */
+body.dark-theme .section,
+body.dark-theme .tab-panel {
+  background: rgba(10, 10, 30, 0.3) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 16px !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 4px 20px rgba(0, 0, 0, 0.3) !important;
+
+  transition: all 0.3s ease;
+}
+
+/* ---------- КНОПКИ ВКЛАДОК (если используются) ---------- */
+body.dark-theme .tab-btn {
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-bottom: none !important;
+  border-radius: 14px 14px 0 0 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+body.dark-theme .tab-btn.active {
+  background: rgba(118, 75, 162, 0.25) !important;
+  border-color: rgba(118, 75, 162, 0.4) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 -4px 30px rgba(118, 75, 162, 0.3) !important;
+  color: #fff !important;
+}
+
+/* ---------- ДОПОЛНИТЕЛЬНЫЕ ЭЛЕМЕНТЫ (виджет погоды, кнопка "Нажми меня!") ---------- */
+body.dark-theme .weather-widget {
+  background: rgba(10, 10, 30, 0.25) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 0 20px rgba(118, 75, 162, 0.15) !important;
+}
+
+body.dark-theme .btn-magic {
+  box-shadow:
+    0 0 30px rgba(118, 75, 162, 0.5),
+    0 0 60px rgba(118, 75, 162, 0.2) !important;
+}
+
+body.dark-theme #countdown {
+  text-shadow: 0 0 20px rgba(118, 75, 162, 0.4);
+}
+
+/* ---------- АНИМАЦИИ ДЛЯ СВЕЧЕНИЯ ---------- */
+@keyframes containerGlow {
+  0% {
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.6),
+      0 0 80px rgba(118, 75, 162, 0.2),
+      0 0 160px rgba(102, 126, 234, 0.08);
+  }
+  100% {
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.6),
+      0 0 120px rgba(118, 75, 162, 0.5),
+      0 0 220px rgba(102, 126, 234, 0.2);
+  }
+}
+
+/* Псевдоэлемент для дополнительного ореола свечения (только тёмная тема) */
+body.dark-theme .container::before {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(118, 75, 162, 0.2) 0%,
+    rgba(102, 126, 234, 0.06) 50%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  border-radius: 40px;
+  animation: glowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
