@@ -1046,3 +1046,99 @@ window.addEventListener('scroll', () => {
 });
 
 
+// Функция обновления иконки в зависимости от темы
+function updateThemeIcon() {
+    const icon = document.getElementById('theme-icon');
+    if (!icon) return;
+
+    const isDark = document.body.classList.contains('dark-theme');
+    const basePath = 'assets/images/';
+    const fileName = isDark ? 'spb-icon-nightmare' : 'spb-icon-daylight';
+    // Если у вас расширение .png, добавьте его:
+    icon.src = basePath + fileName + '.png';
+    // Если SVG – замените .png на .svg
+    // icon.src = basePath + fileName + '.svg';
+}
+
+// Вызываем при загрузке страницы
+document.addEventListener('DOMContentLoaded', updateThemeIcon);
+
+// Следим за переключением темы (кнопка уже есть, добавим вызов)
+if (themeToggle) {
+    // Сохраняем оригинальный обработчик (если он уже есть)
+    const originalClick = themeToggle.onclick;
+    themeToggle.addEventListener('click', function () {
+        // После переключения класса обновляем иконку
+        // Используем setTimeout, чтобы класс уже успел измениться
+        setTimeout(updateThemeIcon, 0);
+    });
+}
+
+// ----- Открытие увеличенной иконки в попапе -----
+const iconElement = document.getElementById('theme-icon');
+const popup = document.getElementById('icon-popup');
+const popupImage = document.getElementById('popup-image');
+const caption = document.getElementById('popup-caption'); // если есть
+
+if (iconElement && popup && popupImage) {
+    // Клик по иконке – открываем попап
+    iconElement.addEventListener('click', function (e) {
+        e.stopPropagation(); // предотвращаем немедленное закрытие
+        popupImage.src = iconElement.src;
+        // Обновляем подпись (если есть)
+        if (caption) {
+            const isDark = document.body.classList.contains('dark-theme');
+            caption.textContent = isDark ? '🌙 Ночная иконка' : '☀️ Дневная иконка';
+        }
+        popup.classList.add('show');
+        popup.style.display = 'block';
+    });
+
+    // Закрытие при клике на любое место вне попапа
+    document.addEventListener('click', function (e) {
+        if (popup.classList.contains('show') && !popup.contains(e.target)) {
+            closePopup();
+        }
+    });
+
+    // Закрытие по клавише Escape
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && popup.classList.contains('show')) {
+            closePopup();
+        }
+    });
+}
+
+function closePopup() {
+    popup.classList.remove('show');
+    // Ждём завершения анимации, затем скрываем
+    setTimeout(() => {
+        if (!popup.classList.contains('show')) {
+            popup.style.display = 'none';
+        }
+    }, 300);
+}
+
+// Функция обновления иконки в зависимости от темы
+function updateThemeIcon() {
+    const icon = document.getElementById('theme-icon');
+    const popupImage = document.getElementById('popup-image');
+    const caption = document.getElementById('popup-caption');
+    if (!icon) return;
+
+    const isDark = document.body.classList.contains('dark-theme');
+    const basePath = 'assets/images/';
+    const fileName = isDark ? 'spb-icon-nightmare' : 'spb-icon-daylight';
+    const fullPath = basePath + fileName + '.png';
+    icon.src = fullPath;
+    icon.alt = isDark ? 'Иконка тёмной темы' : 'Иконка светлой темы';
+
+    // Если попап открыт, обновляем и его содержимое
+    if (popupImage && popupImage.src !== fullPath) {
+        popupImage.src = fullPath;
+    }
+    if (caption) {
+        caption.textContent = isDark ? '🌙 Ночная иконка' : '☀️ Дневная иконка';
+    }
+}
+

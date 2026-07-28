@@ -38,6 +38,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
   </head>
   <body>
+    <!-- Попап для увеличенной иконки -->
+    <div id="icon-popup" class="icon-popup" style="display: none">
+      <div class="popup-content">
+        <img id="popup-image" src="" alt="Увеличенная иконка" />
+        <!-- Кнопка закрытия УДАЛЕНА -->
+        <div class="popup-caption" id="popup-caption">Иконка</div>
+      </div>
+    </div>
     <!-- Кастомный курсор -->
     <div id="cursor-dot"></div>
     <div id="cursor-trail"></div>
@@ -53,6 +61,12 @@
       <header>
         <div class="header-top">
           <div class="header-left">
+            <img
+              id="theme-icon"
+              src="assets/images/spb-icon-daylight.png"
+              alt="Иконка темы"
+              class="header-logo"
+            />
             <h1 id="greeting">Доброй ночи!</h1>
             <p id="time-display">🕐 04:33:07</p>
           </div>

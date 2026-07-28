@@ -1754,3 +1754,418 @@ body.dark-theme .container::before {
     transform: scale(1.04);
   }
 }
+
+.glowing-text {
+  color: #00d4ff; /* Цвет текста */
+  text-shadow:
+    0 0 7px #00d4ff,
+    0 0 10px #00d4ff,
+    0 0 21px #00d4ff,
+    0 0 42px #0fa9e6,
+    0 0 82px #0fa9e6,
+    0 0 92px #0fa9e6,
+    0 0 102px #0fa9e6,
+    0 0 151px #0fa9e6;
+}
+
+.glow-box {
+  background: rgba(255, 255, 255, 0.05); /* Полупрозрачный фон */
+  border-radius: 15px;
+  box-shadow:
+    0 0 20px rgba(0, 212, 255, 0.5),
+    /* Внешнее свечение */ inset 0 0 20px rgba(0, 212, 255, 0.2); /* Внутреннее свечение */
+  padding: 20px;
+  backdrop-filter: blur(10px); /* Стеклянный эффект (опционально) */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pulse-btn {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(102, 252, 241, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(102, 252, 241, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(102, 252, 241, 0);
+  }
+}
+
+/* Значок в шапке */
+.header-logo {
+  height: 40px; /* задайте нужную высоту */
+  width: auto; /* ширина подстроится пропорционально */
+  margin-right: 0.75rem; /* отступ справа от заголовка */
+  display: inline-block;
+  vertical-align: middle; /* выравнивание по вертикали */
+  flex-shrink: 0; /* чтобы не сжимался на маленьких экранах */
+}
+
+/* Для тёмной темы – можно инвертировать или затемнить */
+body.dark-theme .header-logo {
+  filter: brightness(0.8) saturate(1.2);
+  /* или filter: invert(1); если логотип тёмный */
+}
+
+.header-left {
+  display: flex;
+  align-items: center; /* вертикальное выравнивание по центру */
+  gap: 0.5rem; /* расстояние между элементами */
+}
+
+@media (max-width: 640px) {
+  .header-logo {
+    height: 30px;
+  }
+}
+
+/* Значок в шапке */
+.header-logo {
+  height: 50px; /* задайте желаемый размер */
+  width: auto;
+  flex-shrink: 0; /* не сжимается на узких экранах */
+  display: inline-block;
+}
+
+/* Выравнивание элементов в .header-left */
+.header-left {
+  display: flex;
+  align-items: center; /* центрируем по вертикали */
+  gap: 0.75rem; /* расстояние между значком и текстом */
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 640px) {
+  .header-logo {
+    height: 30px;
+  }
+}
+
+.header-logo {
+  width: 50px; /* фиксированная ширина */
+  height: 50px; /* такая же высота — для круга */
+  border-radius: 50%; /* обрезаем по кругу */
+  object-fit: cover; /* изображение заполняет круг, не искажаясь */
+  flex-shrink: 0; /* не сжимается */
+  display: inline-block;
+}
+
+@media (max-width: 640px) {
+  .header-logo {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-logo {
+  width: 60px; /* было 40px */
+  height: 60px; /* было 40px */
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem; /* было 0.75rem – можно увеличить до 1.2rem */
+}
+
+@media (max-width: 640px) {
+  .header-logo {
+    width: 40px;
+    height: 40px;
+  }
+  .header-left {
+    gap: 0.6rem;
+  }
+}
+
+/* Попап для иконки – появляется в левом верхнем углу */
+.icon-popup {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  max-width: 300px;
+  max-height: 80vh;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none; /* скрыт */
+}
+
+.icon-popup.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.popup-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+/* Тёмная тема – попап темнее */
+body.dark-theme .icon-popup {
+  background: rgba(30, 30, 50, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Адаптив для маленьких экранов */
+@media (max-width: 640px) {
+  .icon-popup {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    padding: 10px;
+  }
+  .popup-content img {
+    max-height: 60vh;
+  }
+}
+
+/* Внутри попапа — обычный курсор, а не кастомный */
+.icon-popup,
+.icon-popup * {
+  cursor: auto !important;
+}
+
+.popup-content img {
+  cursor: zoom-in !important;
+}
+
+.header-logo {
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+}
+
+.header-logo:hover {
+  transform: scale(1.12) rotate(6deg);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+}
+
+/* === ПОПАП ДЛЯ ИКОНКИ === */
+.icon-popup {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 20px 20px 16px;
+  box-shadow: 0 12px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  max-width: 320px;
+  max-height: 85vh;
+  opacity: 0;
+  transform: scale(0.8) translateY(-20px);
+  pointer-events: none;
+  transition:
+    opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: auto !important;
+}
+
+.icon-popup.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+/* Все элементы внутри попапа — обычный курсор */
+.icon-popup * {
+  cursor: auto !important;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.popup-content img {
+  width: auto;
+  height: auto;
+  max-width: 280px;
+  max-height: 60vh;
+  border-radius: 16px;
+  object-fit: contain;
+  cursor: zoom-in !important;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Анимация при наведении на изображение */
+.popup-content img:hover {
+  transform: scale(1.04) rotate(1deg);
+}
+
+/* Подпись под картинкой */
+.popup-caption {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2d3748;
+  text-align: center;
+  padding: 6px 12px;
+  background: rgba(102, 126, 234, 0.08);
+  border-radius: 40px;
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  transition: all 0.3s ease;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+body.dark-theme .popup-caption {
+  color: #d0d0e8;
+  background: rgba(102, 126, 234, 0.15);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* Тёмная тема */
+body.dark-theme .icon-popup {
+  background: rgba(30, 30, 50, 0.96);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Адаптив */
+@media (max-width: 640px) {
+  .icon-popup {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    padding: 16px;
+  }
+  .popup-content img {
+    max-width: 100%;
+    max-height: 55vh;
+  }
+}
+
+/* === ОБЁРТКА ИКОНКИ === */
+.icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* === УВЕЛИЧЕННАЯ КОПИЯ === */
+.icon-zoom {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.85);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1000;
+  min-width: 80px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-zoom img {
+  max-width: 160px;
+  max-height: 160px;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Показываем при наведении на обёртку */
+.icon-wrapper:hover .icon-zoom {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  pointer-events: none; /* чтобы не мешать клику по иконке */
+}
+
+/* Стрелочка-треугольник снизу */
+.icon-zoom::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.92);
+}
+
+/* Тёмная тема */
+body.dark-theme .icon-zoom {
+  background: rgba(30, 30, 50, 0.95);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+body.dark-theme .icon-zoom::after {
+  border-top-color: rgba(30, 30, 50, 0.95);
+}
+
+/* === АДАПТИВНОСТЬ === */
+@media (max-width: 640px) {
+  .icon-zoom {
+    padding: 8px;
+    min-width: 60px;
+    min-height: 60px;
+    bottom: calc(100% + 10px);
+    border-radius: 16px;
+  }
+  .icon-zoom img {
+    max-width: 120px;
+    max-height: 120px;
+  }
+  .icon-zoom::after {
+    border-width: 6px;
+  }
+}
